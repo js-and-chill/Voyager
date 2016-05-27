@@ -1,0 +1,13 @@
+
+.Input {
+
+  border-radius: 0;
+  border: none;
+  padding: 5px;
+  font-size: 13px;
+  width: 500px;
+
+  &:hover, &:focus {
+    outline: none;
+  }
+}

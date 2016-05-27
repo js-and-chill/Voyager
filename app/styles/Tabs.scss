@@ -1,0 +1,37 @@
+
+.Tabs {
+
+  background: linear-gradient(to left, rgba(235,235,235,1) 0%, rgba(242,242,242,1) 53%, rgba(252,252,252,1) 100%);
+  padding-left: 80px;
+  background-color: #f0f0f0;
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: flex-end;
+  height: 35px;
+  position: relative;
+  background: none;
+
+  .list {
+  
+    bottom: 0;
+    width: 100%;
+    margin-right: 50px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .plus {
+    background-color: #FFF;
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    i {
+      color: silver;
+      margin-top: 5px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+
+.Suggestions {
+
+  background-color: white;
+  border: 1px solid #f0f0f0;
+  font-size: 13px;
+  font-family: Helvetica;
+  margin-top: -1px;
+
+  .group {
+
+    .group-title {
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 15px;
+        color: grey;
+      }
+
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .item {
+    
+      padding: 5px 25px;
+
+      &.active {
+        background-color: #3498db;
+        color: white;
+      }
+    }
+  }
+
+}

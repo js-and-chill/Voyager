@@ -1,0 +1,55 @@
+
+.Content {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 1;
+  left: 0; right: 0;
+  height: 100%;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF;
+
+  &.active {
+    z-index: 1;
+  }
+
+  .webview-element {
+    flex: 1;
+  }
+
+  .toolbar {
+
+    display: flex;
+    align-items: center;
+    height: 35px;
+
+    color: grey;
+
+    .ion-refresh {
+      cursor: pointer;
+      margin: 0 20px; 
+    }
+
+    .back-forward {
+    
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 35px;
+      color: #424242;
+
+      i {
+        cursor: pointer;
+        font-size: 20px;
+        padding-top: 2px;
+      }
+
+      .disabled {
+        cursor: default;
+        color: silver;
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+
+.AddressBar {
+
+  position: relative;
+  border: 1px solid #f0f0f0;
+
+  .input-content {
+    padding-left: 70px;
+    color: #525252;
+    width: 500px;
+    border: none;
+    outline: none;
+  }
+
+  .Suggestions {
+    position: absolute;
+    width: 499px;
+  }
+
+  .input {
+    padding: 5px;
+    border: none;
+    width: 500px;
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+
+    &.https-input {
+      padding-left: 42px;
+    }
+  }
+
+  .https {
+    font-family: Helvetica;
+    font-size: 13px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 2px;
+    position: absolute;
+    color: #2ecc71;
+    pointer-events: none;
+  }
+}
