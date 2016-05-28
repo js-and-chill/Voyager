@@ -17,15 +17,6 @@ if (process.env.BROWSER) {
 )
 class Browser extends Component {
 
-  state = {
-    addressFocus: false,
-    keys: []
-  }
-
-  componentWillReceiveProps ({ tabs }) {
-    this.setState({ keys: tabs.map(e => Date.now()) })
-  }
-
   render () {
     const { current, tabs } = this.props
 
@@ -36,11 +27,10 @@ class Browser extends Component {
           {tabs.map((tab, index) => {
             return (
               <Content
-                addressFocus={this.state.addressFocus}
-                src={tab.history[tab.url]}
+                src={tab.history[tab.cursor]}
                 active={current === index}
                 index={index}
-                key={tab.key + tab.history[tab.url]} />
+                key={tab.id} />
             )
           })}
         </div>

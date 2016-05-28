@@ -8,7 +8,7 @@ const createClientListener = (event, callback) =>
 createClientListener('popup', (_, url) => createWindow(url, {
   width: 600,
   height: 600,
-  titleBarStyle: 'default',
+  titleBarStyle: 'default'
 }))
 
 const shortcut = window => (key, event) => globalShortcut.register(key, () => {
@@ -17,9 +17,8 @@ const shortcut = window => (key, event) => globalShortcut.register(key, () => {
 
 app.on('ready', () => {
   const window = createWindow('http://localhost:3000')
-  
-  window.on('focus', () => {
 
+  window.on('focus', () => {
     const register = shortcut(window)
 
     register('CommandOrControl+L', 'address:focus')
@@ -27,7 +26,6 @@ app.on('ready', () => {
     register('CommandOrControl+W', 'remove:tab')
     register('CommandOrControl+Alt+Left', 'tab:left')
     register('CommandOrControl+Alt+Right', 'tab:right')
-  
   })
 
   window.on('blur', () => {
