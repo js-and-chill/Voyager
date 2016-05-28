@@ -3,7 +3,14 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 
 import { connect } from 'react-redux'
-import { addTab, updateLocation, updateTitle, updateFavicon, goBack, goForward } from 'actions/tabs'
+import {
+  addTab,
+  updateCurrentTabUrl,
+  updateTabTitle,
+  updateTabFavicon,
+  historyGoBack,
+  historyGoForward
+} from 'actions/tabs'
 
 import AddressBar from './AddressBar'
 import Webview from './Webview'
@@ -13,63 +20,50 @@ if (process.env.BROWSER) {
 }
 
 @connect(
-  state => ({
-    current: state.tabs.current,
-    tabs: state.tabs.tabs,
-    address: state.tabs.currentAddress,
-    shortcut: state.shortcuts.emitter
+  ({ shortcuts, tabs: { current, tabs } }) => ({
+    canGoBack: tabs[current].cursor < tabs[current].history.length - 1,
+    canGoForward: tabs[current].cursor > 0,
+    shortcut: shortcuts.emitter,
+    current,
+    tabs
   })
 )
 class Content extends Component {
 
-  canGoBack = () => {
-    const { tabs, current } = this.props
-
-    return tabs[current].url < tabs[current].history.length - 1
-  }
-
-  canGoForward = () => {
-    const { tabs, current } = this.props
-
-    return tabs[current].url > 0
-  }
-
   reload = () => {
-    console.log('hey')
     this.refs.webview.reload()
   }
 
   back = () => {
-    if (this.canGoBack()) {
-      this.props.dispatch(goBack())
+    if (this.props.canGoBack) {
+      this.props.dispatch(historyGoBack())
     }
   }
 
   forward = () => {
-    if (this.canGoForward()) {
-      this.props.dispatch(goForward())
+    if (this.props.canGoForward) {
+      this.props.dispatch(historyGoForward())
     }
   }
 
   newWindow = e => {
     const { dispatch } = this.props
-
-    return dispatch(addTab(e.url))
+    return dispatch(addTab({ url: e.url }))
   }
 
   clickedLink = e => {
     const { dispatch } = this.props
-    dispatch(updateLocation(e.url))
+    dispatch(updateCurrentTabUrl({ url: e.url }))
   }
 
   didFinishLoad = ({ title }) => {
     const { dispatch, index } = this.props
-    dispatch(updateTitle(index, title))
+    dispatch(updateTabTitle({ index, title }))
   }
 
   onFaviconUpdate = e => {
     const { dispatch, index } = this.props
-    dispatch(updateFavicon(index, e.favicons))
+    dispatch(updateTabFavicon({ index, favicon: e.favicons[0] }))
   }
 
   render () {
@@ -80,10 +74,10 @@ class Content extends Component {
         <div className='toolbar'>
           <div className='back-forward'>
             <i
-              className={cx('ion-ios-arrow-back', { disabled: !this.canGoBack() })}
+              className={cx('ion-ios-arrow-back', { disabled: !this.props.canGoBack })}
               onClick={this.back} />
             <i
-              className={cx('ion-ios-arrow-forward', { disabled: !this.canGoForward() })}
+              className={cx('ion-ios-arrow-forward', { disabled: !this.props.canGoForward })}
               onClick={this.forward} />
           </div>
           <i className='ion-refresh' onClick={this.reload} />

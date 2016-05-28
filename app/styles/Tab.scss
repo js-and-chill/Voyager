@@ -21,14 +21,14 @@
   top: 5px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   max-width: 150px;
 
   .ion-close-round {
     position: absolute;
     font-size: 12px;
     top: 9px;
-    right: 10px;;
+    right: 10px;
   }
 
   .title {
@@ -51,7 +51,7 @@
   }
 
   .new-tab {
-  
+
     flex: 0.0001;
     animation: flexGrow 500ms ease forwards;
   }

@@ -1,7 +1,12 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeTab, setCurrent, addTab, updateFavicon } from 'actions/tabs'
+import {
+  removeTab,
+  setCurrentTab,
+  addTab,
+  updateTabFavicon,
+} from 'actions/tabs'
 import Tab from './Tab'
 
 if (process.env.BROWSER) {
@@ -12,19 +17,22 @@ if (process.env.BROWSER) {
 class Tabs extends Component {
 
   selectTab = index => () => {
-    this.props.dispatch(setCurrent(index))
+    this.props.dispatch(setCurrentTab({ current: index }))
   }
 
   close = index => () => {
-    this.props.dispatch(removeTab(index))
+    this.props.dispatch(removeTab({ index }))
   }
 
   addTab = () => {
-    this.props.dispatch(addTab('https://www.google.com'))
+    this.props.dispatch(addTab({ url: 'https://www.google.com', append: false }))
   }
 
   updateFavicon = index => () => {
-    this.props.dispatch(updateFavicon(index, [ 'https://cdn2.iconfinder.com/data/icons/ourea-icons/128/File_-_Default_256x256-32.png' ]))
+    this.props.dispatch(updateTabFavicon({
+      index,
+      favicon: 'https://cdn2.iconfinder.com/data/icons/ourea-icons/128/File_-_Default_256x256-32.png'
+    }))
   }
 
   render () {

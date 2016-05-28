@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 
-import { updateAddress, exec } from 'actions/tabs'
+import { exec } from 'actions/tabs'
+
 import { emptySuggestions, suggest } from 'actions/autocomplete'
 
 import Like from './Like'
@@ -30,7 +31,7 @@ class AddressBar extends Component {
     const { value } = e.target
     const { dispatch } = this.props
 
-    dispatch(updateAddress(value))
+    // dispatch(updateAddress(value))
 
     if (value) {
       return this.updateSuggestions(value)

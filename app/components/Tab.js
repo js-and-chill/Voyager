@@ -31,7 +31,6 @@ class Tab extends Component {
       <div
         onMouseEnter={this.mouseOver(true)}
         onMouseLeave={this.mouseOver(false)}
-        onClick={onClick}
         className={cx('Tab new-tab', { active })}>
 
         {favicon && <img
@@ -40,6 +39,7 @@ class Tab extends Component {
           width={15} />}
 
         <span
+          onClick={onClick}
           className='title'>
           {title}
         </span>
