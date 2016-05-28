@@ -27,7 +27,7 @@
   .ion-close-round {
     position: absolute;
     font-size: 12px;
-    top: 9px;
+    top: 7px;
     right: 10px;
   }
 
@@ -44,7 +44,7 @@
   }
 
   img {
-    margin-top: 3px;
+    margin-top: -2px;
     margin-right: 5px;
   }
 
@@ -54,7 +54,6 @@
   }
 
   .new-tab {
-
     flex: 0.0001;
     animation: flexGrow 500ms ease forwards;
   }

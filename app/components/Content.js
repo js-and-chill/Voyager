@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import cx from 'classnames'
-
 import { connect } from 'react-redux'
 import {
   addTab,
@@ -21,8 +20,8 @@ if (process.env.BROWSER) {
 
 @connect(
   ({ shortcuts, tabs: { current, tabs } }) => ({
-    canGoBack: tabs[current].cursor < tabs[current].history.length - 1,
-    canGoForward: tabs[current].cursor > 0,
+    canGoBack: tabs && tabs[current] && tabs[current].cursor < tabs[current].history.length - 1,
+    canGoForward: tabs && tabs[current] && tabs[current].cursor > 0,
     shortcut: shortcuts.emitter,
     current,
     tabs
@@ -63,7 +62,7 @@ class Content extends Component {
 
   onFaviconUpdate = e => {
     const { dispatch, index } = this.props
-    dispatch(updateTabFavicon({ index, favicon: e.favicons[0] }))
+    dispatch(updateTabFavicon({ index, favicon: e.favicons[e.favicons.length - 1] }))
   }
 
   render () {

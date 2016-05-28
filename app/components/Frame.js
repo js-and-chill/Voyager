@@ -27,12 +27,21 @@ class Frame extends Component {
   }
 
   componentDidMount () {
-    const { shortcut, dispatch, current, tabs } = this.props
+    const { shortcut, dispatch } = this.props
 
-    shortcut.on('remove:tab', () => dispatch(removeTab({ current })))
-    shortcut.on('tab:left', () => dispatch(setCurrentTab(!current ? tabs.length - 1 : current - 1)))
-    shortcut.on('tab:right', () => dispatch(setCurrentTab(current === tabs.length - 1 ? 0 : current + 1)))
-    shortcut.on('new:tab', () => dispatch(addTab({ url: 'https://www.google.com', append: false })))
+    shortcut.on('remove:tab', () => dispatch(removeTab({ index: this.props.current })))
+    shortcut.on('new:tab', () => {
+      dispatch(addTab({ url: 'https://www.google.com', append: false }))
+      dispatch(setCurrentTab({ current: this.props.tabs.length - 1 }))
+    })
+    shortcut.on('tab:left', () => {
+      const { current, tabs } = this.props
+      return dispatch(setCurrentTab({ current: !current ? tabs.length - 1 : current - 1 }))
+    })
+    shortcut.on('tab:right', () => {
+      const { current, tabs } = this.props
+      return dispatch(setCurrentTab({ current: current === tabs.length - 1 ? 0 : current + 1 }))
+    })
   }
 
   render () {

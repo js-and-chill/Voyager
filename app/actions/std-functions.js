@@ -1,9 +1,9 @@
 
-import { updateLocation } from 'actions/tabs'
+import { updateCurrentTabUrl } from 'actions/tabs'
 import { createAction } from 'redux-actions'
 
 export const execFunctions = dispatch => ({
-  redirect: url => dispatch(updateLocation(url))
+  redirect: url => dispatch(updateCurrentTabUrl({ url }))
 })
 
 const addSuggestionGroup = createAction('ADD_SUGGESTION_GROUP', group => group)

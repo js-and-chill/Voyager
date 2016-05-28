@@ -61,6 +61,7 @@ class Address extends Component {
     }
 
     if (e.key === 'Enter') {
+      this.setState({ empty: true })
       const { value } = e.target
       onSubmit(value)
     }
