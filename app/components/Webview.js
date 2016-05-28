@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 
 class Webview extends Component {
@@ -10,17 +9,16 @@ class Webview extends Component {
     onClickedLink: React.PropTypes.func,
     onDidClickLink: React.PropTypes.func,
     onDidFinishLoad: React.PropTypes.func,
-    onFaviconUpdate: React.PropTypes.func,
+    onFaviconUpdate: React.PropTypes.func
   }
 
   componentDidMount () {
-  
     const {
       onNewWindow,
       onClickedLink,
       onDidClickLink,
       onDidFinishLoad,
-      onFaviconUpdate,
+      onFaviconUpdate
     } = this.props
 
     const { webview } = this.refs
@@ -36,12 +34,11 @@ class Webview extends Component {
   }
 
   componentWillUnmount () {
-  
     const {
       onNewWindow,
       onClickedLink,
       onDidClickLink,
-      onFaviconUpdate,
+      onFaviconUpdate
     } = this.props
 
     const { webview } = this.refs
@@ -59,10 +56,9 @@ class Webview extends Component {
   }
 
   render () {
-
     const {
       className,
-      src,
+      src
     } = this.props
 
     return (

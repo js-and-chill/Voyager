@@ -10,41 +10,41 @@ class Tab extends Component {
 
   state = {
     mouseOver: false,
-    loading: false,
+    loading: false
   }
 
-  render () {
+  mouseOver = mouseOver => () => this.setState({ mouseOver })
 
+  render () {
     const {
       onClick,
       onClose,
       onError,
       favicon,
       title,
-      active,
+      active
     } = this.props
 
     const { mouseOver } = this.state
 
     return (
       <div
-        onMouseEnter={() => this.setState({ mouseOver: true })}
-        onMouseLeave={() => this.setState({ mouseOver: false })}
+        onMouseEnter={this.mouseOver(true)}
+        onMouseLeave={this.mouseOver(false)}
         onClick={onClick}
         className={cx('Tab new-tab', { active })}>
 
         {favicon && <img
-           src={favicon}
-           onError={onError}
-           width={15} />}
+          src={favicon}
+          onError={onError}
+          width={15} />}
 
         <span
           className='title'>
           {title}
         </span>
 
-        {mouseOver &&
-          <i className='ion-close-round' onClick={onClose}/>}
+        {mouseOver && <i className='ion-close-round' onClick={onClose} />}
       </div>
     )
   }

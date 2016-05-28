@@ -1,15 +1,11 @@
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import cx from 'classnames'
 import { debounce } from 'lodash'
 
-import { updateAddress, exec} from 'actions/tabs'
+import { updateAddress, exec } from 'actions/tabs'
 import { emptySuggestions, suggest } from 'actions/autocomplete'
 
-import Input from './Input'
 import Like from './Like'
-import Autocomplete from './Autocomplete'
 import Address from './Address'
 
 if (process.env.BROWSER) {
@@ -21,7 +17,7 @@ if (process.env.BROWSER) {
     suggestions: state.autocomplete.groups.filter(g => !!g.list.length),
     tabs: state.tabs.tabs,
     current: state.tabs.current,
-    shortcut: state.shortcuts.emitter,
+    shortcut: state.shortcuts.emitter
   })
 )
 class AddressBar extends Component {
@@ -48,9 +44,10 @@ class AddressBar extends Component {
     return dispatch(exec(value))
   }
 
-  render () {
+  evalSuggestion = value => this.props.dispatch(suggest(value))
 
-    const { address, dispatch, suggestions, current, tabs, src } = this.props
+  render () {
+    const { suggestions, src } = this.props
 
     return (
       <div className='AddressBar'>
@@ -62,7 +59,7 @@ class AddressBar extends Component {
             inputClassName='Input'
             suggestionsClassName='Suggestions'
             suggestions={suggestions}
-            onChange={value => dispatch(suggest(value))}/>
+            onChange={this.evalSuggestion} />
         </div>
       </div>
     )

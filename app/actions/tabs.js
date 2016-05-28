@@ -10,17 +10,15 @@ export const exec = query => dispatch => {
 }
 
 export const goBack = () => dispatch => {
-
   const updateCurrent = createAction('UPDATE_CURRENT_TAB', updater => updater)
   dispatch(updateCurrent(tab => ({
     ...tab,
-    url: tab.url + 1,
+    url: tab.url + 1
   })))
   dispatch(updateAddress())
 }
 
 export const goRight = () => (dispatch, getState) => {
-
   const { tabs } = getState()
   const { tabs: list, current } = tabs
 
@@ -29,7 +27,6 @@ export const goRight = () => (dispatch, getState) => {
 }
 
 export const goLeft = () => (dispatch, getState) => {
-
   const { tabs } = getState()
   const { tabs: list, current } = tabs
 
@@ -38,22 +35,19 @@ export const goLeft = () => (dispatch, getState) => {
 }
 
 export const goForward = () => (dispatch, getState) => {
-
   const updateCurrent = createAction('UPDATE_CURRENT_TAB', updater => updater)
   dispatch(updateCurrent(tab => ({
     ...tab,
-    url: tab.url ? tab.url - 1 : tab.url,
+    url: tab.url ? tab.url - 1 : tab.url
   })))
   dispatch(updateAddress())
 }
 
 export const addTab = query => (dispatch, getState) => {
-
   const add = createAction('ADD_TAB', tab => tab)
   const { tabs, shortcuts } = getState()
 
-
-  dispatch(add({ title: query.slice(0, 9) + '...', url: 0, history: [ query ] } ))
+  dispatch(add({ title: query.slice(0, 9) + '...', url: 0, history: [ query ] }))
 
   dispatch(setCurrent(tabs.tabs.length))
   shortcuts.emitter.emit('address:focus')
@@ -62,7 +56,6 @@ export const addTab = query => (dispatch, getState) => {
 export const updateAddress = createAction('UPDATE_ADDRESS_BAR', url => url)
 
 export const setCurrent = index => (dispatch, getState) => {
-
   const setCurrentTab = createAction('SET_CURRENT_TAB', index => index)
 
   dispatch(setCurrentTab(index))
@@ -71,26 +64,27 @@ export const setCurrent = index => (dispatch, getState) => {
 }
 
 export const removeTab = index => (dispatch, getState) => {
-
   const remove = createAction('REMOVE_TAB', index => index)
   const { tabs } = getState()
 
-  if (tabs.current === 0) { dispatch(setCurrent(0)) }
-  else if (tabs.current === tabs.length - 1) { dispatch(setCurrent(tabs.length - 2)) }
-  else { dispatch(setCurrent(tabs.current - 1)) }
+  if (tabs.current === 0) {
+    dispatch(setCurrent(0))
+  } else if (tabs.current === tabs.length - 1) {
+    dispatch(setCurrent(tabs.length - 2))
+  } else {
+    dispatch(setCurrent(tabs.current - 1))
+  }
 
   dispatch(remove(index))
   dispatch(updateAddress())
 }
 
 export const removeCurrent = () => (dispatch, getState) => {
-
   const { tabs } = getState()
   dispatch(removeTab(tabs.current))
 }
 
 export const updateLocation = url => dispatch => {
-
   const updateCurrent = createAction('UPDATE_CURRENT_TAB', updater => updater)
 
   dispatch(updateAddress(url))
@@ -103,7 +97,6 @@ export const updateLocation = url => dispatch => {
 }
 
 export const updateTitle = (index, title) => dispatch => {
-
   const updateCurrent = createAction('UPDATE_INDEX', updater => updater)
 
   dispatch(updateCurrent(Object.assign(
@@ -113,7 +106,6 @@ export const updateTitle = (index, title) => dispatch => {
 }
 
 export const updateFavicon = (index, favicons) => dispatch => {
-
   const updateCurrent = createAction('UPDATE_INDEX', updater => updater)
 
   dispatch(updateCurrent(Object.assign(

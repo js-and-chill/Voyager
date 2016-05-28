@@ -1,7 +1,5 @@
 
 import React, { Component } from 'react'
-import { debounce } from 'lodash'
-
 import Input from './Input'
 import Suggestions from './Suggestions'
 
@@ -14,7 +12,7 @@ class Address extends Component {
   state = {
     active: [ 0, 0 ],
     inputValue: '',
-    empty: true,
+    empty: true
   }
 
   handleKey = e => {
@@ -22,21 +20,16 @@ class Address extends Component {
     const { suggestions, onSubmit } = this.props
 
     if (e.key === 'ArrowUp') {
-
-      const { value } = e.target
       let nextActiveGroup, nextActiveItem
 
       if (activeItem === 0) {
-
         nextActiveGroup = activeGroup === 0
           ? suggestions.length - 1
           : activeGroup - 1
 
         const { list } = suggestions[nextActiveGroup]
         nextActiveItem = list.length - 1
-
       } else {
-        
         nextActiveGroup = activeGroup
         nextActiveItem = activeItem - 1
       }
@@ -48,20 +41,15 @@ class Address extends Component {
     }
 
     if (e.key === 'ArrowDown') {
-
-      const { value } = e.target
       let nextActiveGroup, nextActiveItem
 
       if (activeItem === suggestions[activeGroup].list.length - 1) {
-
         nextActiveGroup = activeGroup === suggestions.length - 1
           ? 0
           : activeGroup + 1
 
         nextActiveItem = 0
-
       } else {
-        
         nextActiveGroup = activeGroup
         nextActiveItem = activeItem + 1
       }
@@ -79,14 +67,13 @@ class Address extends Component {
   }
 
   onInputChange = value => {
-
     const { onChange } = this.props
 
     if (!value) { return this.setState({ empty: true, inputValue: value }) }
 
     this.setState({
       empty: false,
-      inputValue: value,
+      inputValue: value
     })
 
     onChange(value)
@@ -99,34 +86,38 @@ class Address extends Component {
 
   handleSuggestionsClick = index => {
     const { onSubmit, suggestions } = this.props
-    onSubmit(suggestions[active])
+    onSubmit(suggestions[index])
   }
 
   componentWillMount () {
     this.setInactive()
   }
 
-  render () {
+  activeSuggestion = active => this.setState({ active })
 
+  deactiveSuggestion = () => this.setState({ active: [ 0, 0 ] })
+
+  render () {
     const { active, empty, inputValue } = this.state
-    const { inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
+    const { inputClassName, suggestionsClassName, suggestions } = this.props
 
     return (
       <div className='Address'>
         <Input
           className={inputClassName}
           onBlur={this.setInactive}
-          completeDidMatch={() => this.setState({ active: [ 0, 0 ] })}
+          completeDidMatch={this.deactiveSuggestion}
           value={inputValue}
           complete={suggestions.length && suggestions[0].list[0]}
           onKeyDown={this.handleKey}
           onChange={this.onInputChange} />
+
           {!empty && <Suggestions
             className={suggestionsClassName}
-            onActiveChange={active => this.setState({ active })}
+            onActiveChange={this.activeSuggestion}
             active={active}
             onClick={this.handleSuggestionsClick}
-            groups={suggestions}/>}
+            groups={suggestions} />}
       </div>
     )
   }

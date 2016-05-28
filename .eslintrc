@@ -1,0 +1,19 @@
+{
+    "parser": "babel-eslint",
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "extends": [
+        "standard",
+        "standard-react"
+    ],
+    "rules": {
+      "react/prop-types": 0
+    }
+}

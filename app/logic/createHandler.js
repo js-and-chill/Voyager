@@ -1,6 +1,4 @@
-
 export const createHandler = (permissions, description) => actions => {
-
   const functions = Object.keys(permissions).reduce((p, c) =>
     ({ ...p, [c]: actions[c] }), {})
 
@@ -11,7 +9,7 @@ export const createHandler = (permissions, description) => actions => {
         ? query => description.suggest(query, functions)
         : null,
       description,
-      permissions,
+      permissions
     }
   )
 }

@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions'
 
 const initial = {
 
-  list: [],
+  list: []
 }
 
 export default handleActions({
@@ -14,8 +14,8 @@ export default handleActions({
     ...state,
     list: [
       ...state.list.slice(0, index),
-      ...state.list.slice(index),
+      ...state.list.slice(index)
     ]
-  }),
+  })
 
 }, initial)

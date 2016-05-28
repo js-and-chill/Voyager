@@ -1,7 +1,5 @@
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeTab, goLeft, goRight } from 'actions/tabs'
 
 import Content from 'components/Content'
 import Frame from 'components/Frame'
@@ -14,7 +12,7 @@ if (process.env.BROWSER) {
   state => ({
     current: state.tabs.current,
     tabs: state.tabs.tabs,
-    shortcut: state.shortcuts.emitter,
+    shortcut: state.shortcuts.emitter
   })
 )
 class Browser extends Component {
@@ -25,12 +23,10 @@ class Browser extends Component {
   }
 
   componentWillReceiveProps ({ tabs }) {
-  
     this.setState({ keys: tabs.map(e => Date.now()) })
   }
 
   render () {
-
     const { current, tabs } = this.props
 
     return (

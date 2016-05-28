@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Mousetrap from 'mousetrap'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
@@ -9,18 +8,18 @@ if (process.env.BROWSER) {
 
 @connect(
   state => ({
-    shortcut: state.shortcuts.emitter,
+    shortcut: state.shortcuts.emitter
   })
 )
 class Input extends Component {
 
   state = {
     left: null,
-    focus: false,
+    focus: false
   }
 
   addComplete = e => {
-    const { complete, completeDidMatch = v => v, onEmpty } = this.props
+    const { complete, completeDidMatch = v => v } = this.props
     const input = e.target
     const { value } = input
 
@@ -45,8 +44,7 @@ class Input extends Component {
    * TODO: escape regexes
    */
   handleCaret = e => {
-
-    const { onChange, complete, completeDidntMatch = v => 0 } = this.props
+    const { onChange, complete } = this.props
     const { value } = e.target
 
     onChange(value)
@@ -91,7 +89,6 @@ class Input extends Component {
   }
 
   componentDidMount () {
-  
     const { shortcut } = this.props
     const { input } = this.refs
 
@@ -105,8 +102,7 @@ class Input extends Component {
   }
 
   render () {
-
-    const { onKeyDown, value, className = '', onFocus, onBlur } = this.props
+    const { value, className = '' } = this.props
     const { left } = this.state
 
     return (
