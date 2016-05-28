@@ -18,7 +18,7 @@ if (process.env.BROWSER) {
 
 @connect(
   state => ({
-    suggestions: state.autocomplete.groups,
+    suggestions: state.autocomplete.groups.filter(g => !!g.list.length),
     tabs: state.tabs.tabs,
     current: state.tabs.current,
     shortcut: state.shortcuts.emitter,

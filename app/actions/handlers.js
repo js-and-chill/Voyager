@@ -3,6 +3,8 @@ import { createHandler } from 'logic/createHandler'
 import fetch from 'superagent'
 import jsonp from 'superagent-jsonp'
 
+export { history } from 'handlers/history'
+
 export const urlHandler = createHandler({
   redirect: true,
 }, {
@@ -28,7 +30,6 @@ export const urlHandler = createHandler({
 
 export const googleSearch = createHandler({
   redirect: true,
-  suggestGroup: true,
 }, {
   name: 'Google',
 
