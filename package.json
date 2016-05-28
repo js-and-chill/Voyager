@@ -32,7 +32,10 @@
     "redux-actions": "^0.9.1",
     "redux-thunk": "^2.1.0",
     "superagent": "^2.0.0-alpha.3",
-    "superagent-jsonp": "0.0.7"
+    "superagent-jsonp": "0.0.7",
+    "voyager-history": "^1.0.1",
+    "voyager-search": "^1.0.0",
+    "voyager-url": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

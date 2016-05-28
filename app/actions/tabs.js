@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import { createExecFinder } from 'logic/exec'
-import * as handlers from './handlers'
+import * as handlers from 'handlers'
 import { execFunctions } from 'actions/std-functions'
 
 export const exec = query => dispatch => {

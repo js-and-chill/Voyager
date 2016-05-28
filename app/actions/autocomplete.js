@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions'
 import fetch from 'superagent'
 import jsonp from 'superagent-jsonp'
 import { createSuggestionsFinder } from 'logic/exec'
-import * as handlers from './handlers'
+import * as handlers from 'handlers'
 import { suggestFunctions } from 'actions/std-functions'
 
 export const suggest = query => dispatch => {
