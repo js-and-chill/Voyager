@@ -18,7 +18,7 @@ class Input extends Component {
     const input = e.target
     const { value } = input
 
-    if (value === this.props.value) { return this.setState({ left: null }) }
+    if (value <= this.props.value) { return this.setState({ left: null }) }
 
     if (complete === value) {
       this.setState({ left: null })
@@ -45,7 +45,11 @@ class Input extends Component {
 
     onChange(value)
 
-    if (complete && value && value.length && !complete.indexOf(value)) {
+    if (complete &&
+        value &&
+        value.length &&
+        value.length > this.props.value.length &&
+        !complete.indexOf(value)) {
       this.addComplete(e)
     } else {
       this.setState({ shouldComplete: false, left: null })
