@@ -1,8 +1,4 @@
-
-import { createHandler } from './createHandler'
-
 export const createExecFinder = (handlers, functions) => query => {
-
   const keys = Object.keys(handlers)
 
   for (const key of keys) {
@@ -15,7 +11,6 @@ export const createExecFinder = (handlers, functions) => query => {
 }
 
 export const createSuggestionsFinder = (handlers, functions) => query => {
-
   const results = Object.keys(handlers)
       .map(key => handlers[key](functions))
       .filter(handler => !!handler.suggest && typeof handler.suggest === 'function')

@@ -8,9 +8,8 @@ if (process.env.BROWSER) {
 class Like extends Component {
 
   render () {
-
     const { likes = '1.7k', favorite = '2k' } = this.props
-  
+
     return (
       <div className='Like'>
         <i className='ion-bookmark thumb' />

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import cx from 'classnames'
 
@@ -19,7 +18,6 @@ class Suggestions extends Component {
   }
 
   renderListItem = group => (item, index) => {
-
     const { active } = this.props
 
     return (
@@ -34,9 +32,6 @@ class Suggestions extends Component {
   }
 
   renderGroup = (group, index) => {
-
-    const { active } = this.props
-
     return (
       <div
         className='group'
@@ -51,7 +46,6 @@ class Suggestions extends Component {
   }
 
   render () {
-  
     const { groups, className = '' } = this.props
 
     return (

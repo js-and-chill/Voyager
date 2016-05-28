@@ -2,13 +2,11 @@
 import { createHandler } from 'logic/createHandler'
 
 export const history = createHandler({
-  
 }, {
 
   name: 'History',
 
   exec (query) {
-  
     const history = JSON.parse(localStorage.getItem('history'))
 
     if (!history.includes(query)) {
@@ -17,9 +15,7 @@ export const history = createHandler({
   },
 
   suggest (query) {
-  
     return new Promise((resolve, reject) => {
-    
       setTimeout(() => {
         const history = JSON.parse(localStorage.getItem('history') || '[]')
 
@@ -28,7 +24,7 @@ export const history = createHandler({
         resolve({
           name: 'History',
           icon: 'https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/clock-128.png',
-          list: results.slice(0, 5),
+          list: results.slice(0, 5)
         })
       }, 0)
     })

@@ -1,9 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { removeTab, setCurrent, addTab, updateFavicon } from 'actions/tabs'
-
 import Tab from './Tab'
 
 if (process.env.BROWSER) {
@@ -30,7 +28,6 @@ class Tabs extends Component {
   }
 
   render () {
-
     const { tabs, active } = this.props
 
     return (

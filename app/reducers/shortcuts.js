@@ -5,7 +5,7 @@ import { EventEmitter } from 'events'
 const { ipcRenderer } = window.require('electron')
 
 const initial = {
-  emitter: new EventEmitter(),
+  emitter: new EventEmitter()
 }
 
 ipcRenderer.on('shortcut', (event, data) => {

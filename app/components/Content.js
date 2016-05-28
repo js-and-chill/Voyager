@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 
 import { connect } from 'react-redux'
-import { addTab, updateLocation, updateTitle, updateAddress, updateFavicon, exec, goBack, goForward } from 'actions/tabs'
+import { addTab, updateLocation, updateTitle, updateFavicon, goBack, goForward } from 'actions/tabs'
 
 import AddressBar from './AddressBar'
 import Webview from './Webview'
@@ -17,7 +17,7 @@ if (process.env.BROWSER) {
     current: state.tabs.current,
     tabs: state.tabs.tabs,
     address: state.tabs.currentAddress,
-    shortcut: state.shortcuts.emitter,
+    shortcut: state.shortcuts.emitter
   })
 )
 class Content extends Component {
@@ -52,34 +52,28 @@ class Content extends Component {
   }
 
   newWindow = e => {
-  
     const { dispatch } = this.props
-    const { ipcRenderer } = window.require('electron')
 
     return dispatch(addTab(e.url))
   }
 
   clickedLink = e => {
-  
     const { dispatch } = this.props
     dispatch(updateLocation(e.url))
   }
 
   didFinishLoad = ({ title }) => {
-  
     const { dispatch, index } = this.props
     dispatch(updateTitle(index, title))
   }
 
   onFaviconUpdate = e => {
-  
     const { dispatch, index } = this.props
     dispatch(updateFavicon(index, e.favicons))
   }
 
   render () {
-
-    const { src, current, tabs, shortcut, active, address, addressFocus, dispatch } = this.props
+    const { src, current, tabs, shortcut, active, address, addressFocus } = this.props
 
     return (
       <div className={cx('Content', { active })}>
@@ -90,7 +84,7 @@ class Content extends Component {
               onClick={this.back} />
             <i
               className={cx('ion-ios-arrow-forward', { disabled: !this.canGoForward() })}
-              onClick={this.forward}/>
+              onClick={this.forward} />
           </div>
           <i className='ion-refresh' onClick={this.reload} />
           <AddressBar

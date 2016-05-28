@@ -9,14 +9,14 @@ if (process.env.BROWSER) {
 
 @connect(
   state => ({
-    shortcut: state.shortcuts.emitter,
+    shortcut: state.shortcuts.emitter
   })
 )
 class Autocomplete extends Component {
 
   state = {
     opened: false,
-    active: 0,
+    active: 0
   }
 
   log (e) {
@@ -29,21 +29,20 @@ class Autocomplete extends Component {
 
   componentDidMount () {
     const { shortcut } = this.props
-  
+
     shortcut.on('up', () => {
-      const { suggestions, onChange } = this.props
+      const { suggestions } = this.props
       const { active } = this.state
 
       this.setState({
-        active: active === 0 ? suggestions.length - 1 : active - 1,
+        active: active === 0 ? suggestions.length - 1 : active - 1
       })
     })
 
     shortcut.on('enter', () => {
-      
       const { active } = this.state
       const { onSelect, suggestions } = this.props
-      
+
       onSelect(suggestions[active])
     })
 
@@ -52,16 +51,17 @@ class Autocomplete extends Component {
       const { active } = this.state
 
       this.setState({
-        active: active === suggestions.length - 1 ? 0 : active + 1,
+        active: active === suggestions.length - 1 ? 0 : active + 1
       })
     })
   }
 
-  render () {
+  onSelect = suggestion => () => this.props.onSelect(suggestion)
 
-    const { suggestions, edit, onSelect } = this.props
+  render () {
+    const { suggestions, edit } = this.props
     const { active } = this.state
-  
+
     return (
       <div className='Autocomplete'>
         {edit && suggestions.map((s, key) => {
@@ -70,7 +70,7 @@ class Autocomplete extends Component {
               key={key}
               className={cx('item', { active: active === key })}
               onMouseEnter={this.setActive(key)}
-              onClick={() => onSelect(suggestions[key])}>
+              onClick={this.onSelect(suggestions[key])}>
               <span>{s}</span>
             </div>
           )

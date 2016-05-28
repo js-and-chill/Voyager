@@ -2,7 +2,7 @@
 import { handleActions } from 'redux-actions'
 
 const initial = {
-  groups: [],
+  groups: []
 }
 
 export default handleActions({
