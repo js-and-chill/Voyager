@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import { createSuggestionsFinder } from 'logic/exec'
-import * as handlers from './handlers'
+import * as handlers from 'handlers'
 import { suggestFunctions } from 'actions/std-functions'
 
 export const suggest = query => dispatch => {
