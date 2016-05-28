@@ -16,14 +16,12 @@ export const urlHandler = createHandler({
 
     const httpFormat = `http://${formatted}`
 
-    if (httpFormat.match(urlRegex)) {
-      redirect(httpFormat)
-      return true
-    }
+    let url = formatted.indexOf('http') === 0 ?
+      formatted : httpFormat
 
-    if (!formatted.match(urlRegex)) { return false }
+    if (!url.match(urlRegex)) { return false }
 
-    redirect(formatted)
+    redirect(url)
     return true
   },
 })
@@ -40,7 +38,15 @@ export const googleSearch = createHandler({
   },
 
   suggest (query) {
+
     return new Promise((resolve, reject) => {
+
+      if (query.length < 3 || query.length > 15) { return resolve({
+        name: 'Google Search',
+        list: [],
+        icon: 'background-image:-webkit-linear-gradient(top, #ffffff 44%, #d6d6d6 100%);'
+      }) }
+
       fetch
         .get(`http://clients1.google.com/complete/search?jsonhl=en&output=toolbar&client=firefox&q=${query}`)
         .use(jsonp)

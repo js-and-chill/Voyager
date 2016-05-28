@@ -2,7 +2,7 @@
 .Tab {
 
   box-sizing: border-box;
-  transition: all .2s ease-in-out;
+  transition: all .1s ease-in-out;
   cursor: default;
   height: 30px;
   bottom: 0;
@@ -16,9 +16,9 @@
   align-items: center;
   flex: 1;
   justify-content: flex-start;
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
   padding: 0 5px;
-  top: 2px;
+  top: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; 
@@ -32,8 +32,8 @@
   }
 
   .title {
-    color: #424242;
-    font-size: 13px;
+    color: #222222;
+    font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: inline-block;
@@ -47,7 +47,7 @@
 
   &.active {
     background-color: #fff;
-    z-index: 1;
+    z-index: 99;
   }
 
   .new-tab {

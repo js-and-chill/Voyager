@@ -1,11 +1,17 @@
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Mousetrap from 'mousetrap'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
 }
 
+@connect(
+  state => ({
+    shortcut: state.shortcuts.emitter,
+  })
+)
 class Input extends Component {
 
   state = {
@@ -82,6 +88,20 @@ class Input extends Component {
     const { onBlur } = this.props
     this.setState({ focus: false })
     onBlur(e)
+  }
+
+  componentDidMount () {
+  
+    const { shortcut } = this.props
+    const { input } = this.refs
+
+    input.focus()
+    input.select()
+
+    shortcut.on('address:focus', () => {
+      input.focus()
+      input.select()
+    })
   }
 
   render () {

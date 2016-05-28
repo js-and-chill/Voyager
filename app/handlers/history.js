@@ -10,7 +10,10 @@ export const history = createHandler({
   exec (query) {
   
     const history = JSON.parse(localStorage.getItem('history'))
-    localStorage.setItem('history', JSON.stringify([ ...history, query ]))
+
+    if (!history.includes(query)) {
+      localStorage.setItem('history', JSON.stringify([ ...history, query ]))
+    }
   },
 
   suggest (query) {
@@ -18,7 +21,7 @@ export const history = createHandler({
     return new Promise((resolve, reject) => {
     
       setTimeout(() => {
-        const history = JSON.parse(localStorage.getItem('history'))
+        const history = JSON.parse(localStorage.getItem('history') || '[]')
 
         const results = history.filter(url => url.indexOf(query.match(/\S+/g).join(' ')) > -1)
 
