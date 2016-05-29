@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/8-I/Voyager/badges/gpa.svg)](https://codeclimate.com/github/8-I/Voyager)
 
 # Voyager
 
