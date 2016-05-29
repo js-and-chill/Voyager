@@ -47,7 +47,7 @@ class Frame extends Component {
     })
     shortcut.on('remove:tab', () => dispatch(removeTab({ index: this.props.current })))
     shortcut.on('new:tab', () => {
-      dispatch(addTab({ url: 'https://www.google.com', append: false }))
+      dispatch(addTab({ url: 'https://www.google.com' }))
       dispatch(setCurrentTab({ current: this.props.tabs.length - 1 }))
     })
     shortcut.on('tab:left', () => {

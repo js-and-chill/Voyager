@@ -47,7 +47,7 @@ class Content extends Component {
 
   newWindow = e => {
     const { dispatch } = this.props
-    return dispatch(addTab({ url: e.url }))
+    return dispatch(addTab({ url: e.url, append: true }))
   }
 
   clickedLink = e => {
