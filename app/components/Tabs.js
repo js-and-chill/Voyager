@@ -5,7 +5,7 @@ import {
   removeTab,
   setCurrentTab,
   addTab,
-  updateTabFavicon,
+  updateTabFavicon
 } from 'actions/tabs'
 import Tab from './Tab'
 
@@ -25,7 +25,7 @@ class Tabs extends Component {
   }
 
   addTab = () => {
-    this.props.dispatch(addTab({ url: 'https://www.google.com', append: false }))
+    this.props.dispatch(addTab({ url: 'https://www.google.com' }))
   }
 
   updateFavicon = index => () => {

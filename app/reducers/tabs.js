@@ -27,17 +27,17 @@ const initial = {
 export default handleActions({
   ADD_TAB (state, { payload: { url, append } }) {
     const { tabs } = state
-    const current = state.current || 0
+    let current = state.current || 0
 
-    // TODO update current tab for append true
     if (!append) {
       return { ...state, tabs: [...tabs, createTab(url)] }
     }
 
-    const newTabs = [...tabs.slice(0, current), createTab(url), ...tabs.slice(current + 1)]
-    const history = state.history.slice(1)
+    current = findIndex(tabs, { id: state.history[0] })
 
-    return { ...state, tabs: newTabs, history, current }
+    const newTabs = [...tabs.slice(0, current + 1), createTab(url), ...tabs.slice(current + 1)]
+
+    return { ...state, tabs: newTabs, current }
   },
 
   UPDATE_TAB_TITLE (state, { payload: { index, title } }) {
