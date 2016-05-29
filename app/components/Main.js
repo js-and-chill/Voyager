@@ -13,10 +13,7 @@ class Main extends Component {
   render () {
     return (
       <Provider store={store}>
-        <div>
-          <Browser />
-          <Devtools />
-        </div>
+        <Browser />
       </Provider>
     )
   }

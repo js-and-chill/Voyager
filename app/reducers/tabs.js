@@ -18,7 +18,7 @@ const initial = {
   current: 0,
 
   tabs: [
-    { id: first, title: 'FapFap.js', cursor: 0, history: [ 'http://www.fapfapjs.io/' ] },
+    { id: first, title: 'google', cursor: 0, history: [ 'https://www.google.com/' ] },
     { id: second, title: 'Youtube', cursor: 0, history: [ 'https://www.youtube.com' ] }
   ],
   history: [first, second]

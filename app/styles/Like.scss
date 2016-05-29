@@ -1,7 +1,7 @@
 
 .Like {
 
-  width: 50px;
+  width: 75px;
   position: absolute;
   top: 0; bottom: 0; left: 0;
   display: flex;
@@ -9,11 +9,24 @@
   color: silver;
   font-family: Helvetica;
   text-transform: uppercase;
+  color: #b3b3b3;
+
+  .like-container,
+  .bookmark-container {
+    display: -webkit-box;
+  }
+
+  .bookmark-container:hover {
+    color: #ffde00;
+  }
+
+  .like-container:hover {
+    color: #fa2c8f;
+  }
 
   span {
     font-size: 0.7em;
     margin-left: 2px;
-    color: #b3b3b3;
 
     &.red { color: red; }
     &.green { color: green; }

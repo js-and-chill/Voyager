@@ -25,14 +25,15 @@
     height: 35px;
 
     color: grey;
+    border-bottom: 1px solid #f0f0f0;
 
     .ion-refresh {
       cursor: pointer;
-      margin: 0 20px; 
+      margin: 0 20px;
     }
 
     .back-forward {
-    
+
       padding-left: 20px;
       display: flex;
       align-items: center;

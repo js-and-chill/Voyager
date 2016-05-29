@@ -12,10 +12,14 @@ class Like extends Component {
 
     return (
       <div className='Like'>
-        <i className='ion-bookmark thumb' />
-        <span>{likes}</span>
-        <i className='ion-android-favorite heart' />
-        <span>{favorite}</span>
+        <div className='bookmark-container'>
+          <i className='ion-bookmark thumb' />
+          <span>{likes}</span>
+        </div>
+        <div className='like-container'>
+          <i className='ion-android-favorite heart' />
+          <span>{favorite}</span>
+        </div>
       </div>
     )
   }
