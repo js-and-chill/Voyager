@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import {
   removeTab,
   setCurrentTab,
-  addTab
+  addTab,
+  historyGoBack,
+  historyGoForward
 } from 'actions/tabs'
 
 import Tabs from './Tabs'
@@ -14,10 +16,10 @@ if (process.env.BROWSER) {
 }
 
 @connect(
-  state => ({
-    tabs: state.tabs.tabs,
-    current: state.tabs.current,
-    shortcut: state.shortcuts.emitter
+  ({ tabs, shortcuts }) => ({
+    tabs: tabs.tabs,
+    current: tabs.current,
+    shortcut: shortcuts.emitter
   })
 )
 class Frame extends Component {
@@ -29,6 +31,20 @@ class Frame extends Component {
   componentDidMount () {
     const { shortcut, dispatch } = this.props
 
+    shortcut.on('history:back', () => {
+      const { current, tabs } = this.props
+      const currentTab = tabs && tabs[current]
+      if (currentTab.history.length - 1 - currentTab.cursor) {
+        dispatch(historyGoBack())
+      }
+    })
+    shortcut.on('history:forward', () => {
+      const { current, tabs } = this.props
+      const currentTab = tabs && tabs[current]
+      if (currentTab.cursor) {
+        dispatch(historyGoForward())
+      }
+    })
     shortcut.on('remove:tab', () => dispatch(removeTab({ index: this.props.current })))
     shortcut.on('new:tab', () => {
       dispatch(addTab({ url: 'https://www.google.com', append: false }))

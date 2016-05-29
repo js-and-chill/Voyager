@@ -21,11 +21,14 @@ app.on('ready', () => {
   window.on('focus', () => {
     const register = shortcut(window)
 
-    register('CommandOrControl+L', 'address:focus')
-    register('CommandOrControl+T', 'new:tab')
-    register('CommandOrControl+W', 'remove:tab')
-    register('CommandOrControl+Alt+Left', 'tab:left')
-    register('CommandOrControl+Alt+Right', 'tab:right')
+    register('CmdOrCtrl+L', 'address:focus')
+    register('CmdOrCtrl+T', 'new:tab')
+    // TODO make an option to select keyboard type
+    register('CmdOrCtrl+Z', 'remove:tab')
+    register('CmdOrCtrl+W', 'history:back')
+    register('CmdOrCtrl+Y', 'history:forward')
+    register('CmdOrCtrl+Alt+Left', 'tab:left')
+    register('CmdOrCtrl+Alt+Right', 'tab:right')
   })
 
   window.on('blur', () => {
