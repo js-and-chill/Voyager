@@ -92,8 +92,8 @@ class Input extends Component {
     const { shortcut } = this.props
     const { input } = this.refs
 
-    input.focus()
-    input.select()
+    // input.focus()
+    // input.select()
 
     shortcut.on('address:focus', () => {
       input.focus()

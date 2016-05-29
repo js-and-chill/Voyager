@@ -100,7 +100,7 @@ class Address extends Component {
 
   render () {
     const { active, empty, inputValue } = this.state
-    const { inputClassName, suggestionsClassName, suggestions } = this.props
+    const { inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
 
     return (
       <div className='Address'>
@@ -108,7 +108,7 @@ class Address extends Component {
           className={inputClassName}
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
-          value={inputValue}
+          value={(!empty && inputValue) || inactiveValue}
           complete={suggestions.length && suggestions[0].list[0]}
           onKeyDown={this.handleKey}
           onChange={this.onInputChange} />

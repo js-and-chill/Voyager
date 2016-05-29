@@ -23,14 +23,22 @@ class Webview extends Component {
 
     const { webview } = this.refs
 
-    this.reload = () => webview.reload()
-    this.loaded = e => onDidFinishLoad && onDidFinishLoad({ e, title: webview.getTitle() })
-
     onNewWindow && webview.addEventListener('new-window', onNewWindow)
     onClickedLink && webview.addEventListener('will-navigate', onClickedLink)
     onDidClickLink && webview.addEventListener('did-navigate', onDidClickLink)
     onFaviconUpdate && webview.addEventListener('page-favicon-updated', onFaviconUpdate)
     onDidFinishLoad && webview.addEventListener('did-finish-load', this.loaded)
+  }
+
+  reload = () => {
+    const { webview } = this.refs
+    this.reload = () => webview.reload()
+  }
+
+  loaded = (e) => {
+    const { onDidFinishLoad } = this.props
+    const { webview } = this.refs
+    return onDidFinishLoad && onDidFinishLoad({ e, title: webview.getTitle() }) && e.target.focus()
   }
 
   componentWillUnmount () {
