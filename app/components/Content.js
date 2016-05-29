@@ -66,7 +66,7 @@ class Content extends Component {
   }
 
   render () {
-    const { src, current, tabs, shortcut, active, address, addressFocus } = this.props
+    const { src, index, current, tabs, shortcut, active, address, addressFocus } = this.props
 
     return (
       <div className={cx('Content', { active })}>
@@ -86,6 +86,7 @@ class Content extends Component {
             active={active}
             src={src}
             current={current}
+            index={index}
             tabs={tabs}
             shortcut={shortcut} />
         </div>

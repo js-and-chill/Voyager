@@ -100,12 +100,13 @@ class Address extends Component {
 
   render () {
     const { active, empty, inputValue } = this.state
-    const { inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
+    const { index, inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
 
     return (
       <div className='Address'>
         <Input
           className={inputClassName}
+          index={index}
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
           value={(!empty && inputValue) || inactiveValue}

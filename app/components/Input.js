@@ -8,7 +8,8 @@ if (process.env.BROWSER) {
 
 @connect(
   state => ({
-    shortcut: state.shortcuts.emitter
+    shortcut: state.shortcuts.emitter,
+    current: state.tabs.current
   })
 )
 class Input extends Component {
@@ -92,12 +93,14 @@ class Input extends Component {
     const { shortcut } = this.props
     const { input } = this.refs
 
-    // input.focus()
-    // input.select()
+    input.focus()
+    input.select()
 
     shortcut.on('address:focus', () => {
-      input.focus()
-      input.select()
+      if (this.props.index === this.props.current) {
+        input.focus()
+        input.select()
+      }
     })
   }
 

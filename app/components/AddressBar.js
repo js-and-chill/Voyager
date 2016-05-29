@@ -48,7 +48,7 @@ class AddressBar extends Component {
   evalSuggestion = value => this.props.dispatch(suggest(value))
 
   render () {
-    const { suggestions, src } = this.props
+    const { suggestions, src, index } = this.props
 
     return (
       <div className='AddressBar'>
@@ -60,6 +60,7 @@ class AddressBar extends Component {
             inputClassName='Input'
             suggestionsClassName='Suggestions'
             suggestions={suggestions}
+            index={index}
             onChange={this.evalSuggestion} />
         </div>
       </div>
