@@ -25,7 +25,9 @@ class Tabs extends Component {
   }
 
   addTab = () => {
-    this.props.dispatch(addTab({ url: 'https://www.google.com' }))
+    const { dispatch, tabs } = this.props
+    dispatch(addTab({ url: 'https://www.google.com' }))
+    this.selectTab(tabs.length)()
   }
 
   updateFavicon = index => () => {
