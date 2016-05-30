@@ -28,6 +28,7 @@ class Webview extends Component {
     onDidClickLink && webview.addEventListener('did-navigate', onDidClickLink)
     onFaviconUpdate && webview.addEventListener('page-favicon-updated', onFaviconUpdate)
     onDidFinishLoad && webview.addEventListener('did-finish-load', this.loaded)
+    webview.addEventListener('hashchange', (...args) => console.log(args))
   }
 
   reload = () => {

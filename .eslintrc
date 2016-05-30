@@ -15,5 +15,10 @@
     ],
     "rules": {
       "react/prop-types": 0
+    },
+    "globals": {
+      "describe": true,
+      "it": true,
+      "expect": true
     }
 }

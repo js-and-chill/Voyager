@@ -25,8 +25,8 @@ app.on('ready', () => {
     register('CmdOrCtrl+T', 'new:tab')
     // TODO make an option to select keyboard type
     register('CmdOrCtrl+Z', 'remove:tab')
-    register('CmdOrCtrl+W', 'history:back')
-    register('CmdOrCtrl+Y', 'history:forward')
+    register('CmdOrCtrl+Left', 'history:back')
+    register('CmdOrCtrl+Right', 'history:forward')
     register('CmdOrCtrl+Alt+Left', 'tab:left')
     register('CmdOrCtrl+Alt+Right', 'tab:right')
   })
