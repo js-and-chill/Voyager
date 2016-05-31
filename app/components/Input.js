@@ -21,6 +21,8 @@ class Input extends Component {
     const selectionEnd = complete && complete.length || null
     const left = complete && complete.replace(value, '') || ''
 
+    this.props.onChange(value)
+
     this.setState({ inputLength: value.length })
     this.props.onChange(value)
 
@@ -44,6 +46,10 @@ class Input extends Component {
   shouldComponentUpdate (props, state) {
     if (props.complete !== this.props.complete) { return true }
     return false
+  }
+
+  blur () {
+    this.refs.input.blur()
   }
 
   select () {

@@ -11,7 +11,6 @@ class Address extends Component {
 
   state = {
     active: [ 0, 0 ],
-    inputValue: '',
     empty: true
   }
 
@@ -36,9 +35,10 @@ class Address extends Component {
       }
 
       this.setState({
-        inputValue: suggestions[nextActiveGroup].list[nextActiveItem],
         active: [ nextActiveGroup, nextActiveItem ]
       })
+
+      input.setValue(suggestions[nextActiveGroup].list[nextActiveItem])
     }
 
     if (e.key === 'ArrowDown') {
@@ -56,36 +56,32 @@ class Address extends Component {
       }
 
       this.setState({
-        inputValue: suggestions[nextActiveGroup].list[nextActiveItem],
         active: [ nextActiveGroup, nextActiveItem ]
       })
 
-      input.setValue(this.state.inputValue)
+      input.setValue(suggestions[nextActiveGroup].list[nextActiveItem])
     }
 
     if (e.key === 'Enter') {
       this.setState({ empty: true })
       const { value } = e.target
       onSubmit(value)
+      this.refs.input.blur()
     }
   }
 
   onInputChange = value => {
     const { onChange } = this.props
 
-    if (!value) { return this.setState({ empty: true, inputValue: value }) }
+    if (!value) { return this.setState({ empty: true }) }
 
-    this.setState({
-      empty: false,
-      inputValue: value
-    })
+    this.setState({ empty: false })
 
     onChange(value)
   }
 
   setInactive = () => {
-    const { inactiveValue } = this.props
-    this.setState({ inputValue: inactiveValue, empty: true, active: [ 0, 0 ] })
+    this.setState({ active: [ 0, 0 ] })
   }
 
   handleSuggestionsClick = index => {
@@ -102,7 +98,7 @@ class Address extends Component {
   deactiveSuggestion = () => this.setState({ active: [ 0, 0 ] })
 
   render () {
-    const { active, empty, inputValue } = this.state
+    const { active, empty } = this.state
     const { index, inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
 
     return (
@@ -113,7 +109,7 @@ class Address extends Component {
           ref='input'
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
-          value={(!empty && inputValue) || inactiveValue}
+          value={inactiveValue}
           displayValue={inactiveValue}
           complete={suggestions.length ? suggestions[0].list[0] : null}
           onKeyDown={this.handleKey}
