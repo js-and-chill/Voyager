@@ -1,123 +1,98 @@
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
 }
 
-@connect(
-  state => ({
-    shortcut: state.shortcuts.emitter,
-    current: state.tabs.current
-  })
-)
 class Input extends Component {
 
   state = {
-    left: null,
+    inputLength: 0,
     focus: false
   }
 
-  addComplete = e => {
-    const { complete, completeDidMatch = v => v } = this.props
-    const input = e.target
+  insertComplete = () => {
+    const { complete } = this.props
+    const { input } = this.refs
     const { value } = input
+    const { inputLength } = this.state
+    const selectionStart = value.length
+    const selectionEnd = complete && complete.length || null
+    const left = complete && complete.replace(value, '') || ''
 
-    if (value <= this.props.value) { return this.setState({ left: null }) }
+    this.setState({ inputLength: value.length })
+    this.props.onChange(value)
 
-    if (complete === value) {
-      this.setState({ left: null })
-      return completeDidMatch()
-    }
+    if (inputLength >= value.length ||
+        typeof complete !== 'string' ||
+        complete.indexOf(value) !== 0) { return }
 
-    const left = complete.substr(value.length, complete.length)
+    input.value = value + left
 
-    this.setState({ left })
-
-    setTimeout(() => {
-      input.focus()
-      input.setSelectionRange(value.length, complete.length)
-    }, 0)
-  }
-
-  /*
-   * TODO: escape regexes
-   */
-  handleCaret = e => {
-    const { onChange, complete } = this.props
-    const { value } = e.target
-
-    onChange(value)
-
-    if (complete &&
-        value &&
-        value.length &&
-        value.length > this.props.value.length &&
-        !complete.indexOf(value)) {
-      this.addComplete(e)
-    } else {
-      this.setState({ shouldComplete: false, left: null })
-    }
+    input.setSelectionRange(selectionStart, selectionEnd)
   }
 
   onKeyDown = e => {
-    const { onKeyDown } = this.props
-
-    if (e.key === 'ArrowUp') {
-      this.setState({ left: null })
-      e.preventDefault()
-    }
-    if (e.key === 'ArrowDown') {
-      this.setState({ left: null })
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault()
     }
 
-    onKeyDown(e)
+    this.props.onKeyDown(e)
   }
 
-  handleClick = e => {
+  shouldComponentUpdate (props, state) {
+    if (props.complete !== this.props.complete) { return true }
+    return false
+  }
+
+  select () {
+    const { input } = this.refs
+
+    input.focus()
+    input.select()
+  }
+
+  onBlur = e => {
+    /*
+     * Or maybe not
+     */
+    const { displayValue } = this.props
+
+    this.setState({ focus: false })
+    e.target.value = displayValue
+    this.props.onBlur(e)
+  }
+
+  onClick = e => {
     if (!this.state.focus) {
       e.target.select()
     }
     this.setState({ focus: true })
   }
 
-  onBlur = e => {
-    const { onBlur } = this.props
-    this.setState({ focus: false })
-    onBlur(e)
-  }
-
   componentDidMount () {
-    const { shortcut } = this.props
     const { input } = this.refs
+    const { displayValue } = this.props
 
+    input.value = displayValue
     input.focus()
     input.select()
-
-    shortcut.on('address:focus', () => {
-      if (this.props.index === this.props.current) {
-        input.focus()
-        input.select()
-      }
-    })
   }
 
   render () {
-    const { value, className = '' } = this.props
-    const { left } = this.state
+    const { className } = this.props
 
     return (
       <input
         className={`Input ${className}`}
         ref='input'
-        onClick={this.handleClick}
-        type='search'
-        value={value + (left || '')}
+        type='text'
         onBlur={this.onBlur}
+        onClick={this.onClick}
         onKeyDown={this.onKeyDown}
-        onChange={this.handleCaret} />
+        onChange={this.insertComplete}
+        />
     )
   }
 }

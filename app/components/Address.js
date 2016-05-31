@@ -110,7 +110,8 @@ class Address extends Component {
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
           value={(!empty && inputValue) || inactiveValue}
-          complete={suggestions.length && suggestions[0].list[0]}
+          displayValue={inactiveValue}
+          complete={suggestions.length ? suggestions[0].list[0] : null}
           onKeyDown={this.handleKey}
           onChange={this.onInputChange} />
 
