@@ -1,16 +1,19 @@
 import { handleActions } from 'redux-actions'
-import { EventEmitter } from 'events'
-
-const { ipcRenderer } = window.require('electron')
 
 const initial = {
-  emitter: new EventEmitter()
+  inputFocus: null,
+  historyBack: null,
+  historyForward: null,
+  removeTab: null,
+  newTab: null,
+  tabLeft: null,
+  tabRight: null
 }
 
-ipcRenderer.on('shortcut', (event, data) => {
-  initial.emitter.emit(data)
-})
-
 export default handleActions({
+
+  SET_SHORTCUT: (state, { payload: { name, action } }) => ({
+    ...state, [name]: action
+  })
 
 }, initial)

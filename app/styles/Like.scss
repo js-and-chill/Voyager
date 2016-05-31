@@ -25,6 +25,7 @@
   }
 
   span {
+    cursor: pointer;
     font-size: 0.7em;
     margin-left: 2px;
 
@@ -34,11 +35,13 @@
 
   .thumb {
     margin-left: 5px;
+    cursor: pointer;
 
     &.green { color: green }
   }
 
   .heart {
+    cursor: pointer;
     margin-left: 7px;
     margin-top: 2px;
 

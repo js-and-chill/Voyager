@@ -55,6 +55,7 @@ class AddressBar extends Component {
         <Like />
         <div className='input-content'>
           <Address
+            active={this.props.active}
             onSubmit={this.submit}
             inactiveValue={src}
             inputClassName='Input'

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { mouseTrap } from 'react-mousetrap'
+
+import { setShortcut } from 'actions/shortcuts'
 
 import {
   removeTab,
@@ -16,10 +19,9 @@ if (process.env.BROWSER) {
 }
 
 @connect(
-  ({ tabs, shortcuts }) => ({
+  ({ tabs }) => ({
     tabs: tabs.tabs,
     current: tabs.current,
-    shortcut: shortcuts.emitter
   })
 )
 class Frame extends Component {
@@ -29,34 +31,38 @@ class Frame extends Component {
   }
 
   componentDidMount () {
-    const { shortcut, dispatch } = this.props
+    const { shortcut, dispatch, bindShortcut } = this.props
 
-    shortcut.on('history:back', () => {
+    bindShortcut('command+left', () => {
       const { current, tabs } = this.props
       const currentTab = tabs && tabs[current]
       if (currentTab.history.length - 1 - currentTab.cursor) {
         dispatch(historyGoBack())
       }
     })
-    shortcut.on('history:forward', () => {
+
+    bindShortcut('command+right', () => {
       const { current, tabs } = this.props
       const currentTab = tabs && tabs[current]
       if (currentTab.cursor) {
         dispatch(historyGoForward())
       }
     })
-    shortcut.on('remove:tab', () => dispatch(removeTab({ index: this.props.current })))
-    shortcut.on('new:tab', () => {
+
+    bindShortcut('command+w', e => {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      dispatch(removeTab({ index: this.props.current }))
+    })
+
+    bindShortcut('command+t', () => {
       dispatch(addTab({ url: 'https://www.google.com' }))
       dispatch(setCurrentTab({ current: this.props.tabs.length - 1 }))
     })
-    shortcut.on('tab:left', () => {
+
+    bindShortcut('command+alt+left', () => {
       const { current, tabs } = this.props
       return dispatch(setCurrentTab({ current: !current ? tabs.length - 1 : current - 1 }))
-    })
-    shortcut.on('tab:right', () => {
-      const { current, tabs } = this.props
-      return dispatch(setCurrentTab({ current: current === tabs.length - 1 ? 0 : current + 1 }))
     })
   }
 
@@ -71,4 +77,4 @@ class Frame extends Component {
   }
 }
 
-export default Frame
+export default mouseTrap(Frame)

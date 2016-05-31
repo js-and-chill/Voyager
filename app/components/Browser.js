@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { mouseTrap } from 'react-mousetrap'
+import { identity } from 'lodash'
 
 import Content from 'components/Content'
 import Frame from 'components/Frame'
@@ -12,7 +14,7 @@ if (process.env.BROWSER) {
   state => ({
     current: state.tabs.current,
     tabs: state.tabs.tabs,
-    shortcut: state.shortcuts.emitter
+    shortcut: state.shortcuts
   })
 )
 class Browser extends Component {
@@ -39,4 +41,4 @@ class Browser extends Component {
   }
 }
 
-export default Browser
+export default mouseTrap(Browser)

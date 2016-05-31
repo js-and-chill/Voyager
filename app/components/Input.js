@@ -1,5 +1,8 @@
 
 import React, { Component } from 'react'
+import { mouseTrap } from 'react-mousetrap'
+
+import { setShortcut } from 'actions/shortcuts'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
@@ -84,7 +87,11 @@ class Input extends Component {
 
   componentDidMount () {
     const { input } = this.refs
-    const { displayValue } = this.props
+    const { displayValue, active, bindShortcut } = this.props
+
+    if (active) {
+      bindShortcut('command+l', () => this.select())
+    }
 
     input.value = displayValue
     input.focus()
@@ -108,4 +115,4 @@ class Input extends Component {
   }
 }
 
-export default Input
+export default mouseTrap(Input)

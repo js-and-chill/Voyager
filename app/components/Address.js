@@ -104,6 +104,7 @@ class Address extends Component {
     return (
       <div className='Address'>
         <Input
+          active={this.props.active}
           className={inputClassName}
           index={index}
           ref='input'
