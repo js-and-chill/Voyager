@@ -109,9 +109,14 @@ class Address extends Component {
           index={index}
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
+<<<<<<< HEAD
           value={(!empty && inputValue) || inactiveValue}
           displayValue={inactiveValue}
           complete={suggestions.length ? suggestions[0].list[0] : null}
+=======
+          value={(!empty && inputValue) || (empty && inputValue && inactiveValue)}
+          complete={suggestions.length && suggestions[0].list[0]}
+>>>>>>> bc3d633033049999425f5310a5d6c1717579be87
           onKeyDown={this.handleKey}
           onChange={this.onInputChange} />
 

@@ -13,7 +13,7 @@ const createTab = (url) => ({
 const first = shortid.generate()
 const second = shortid.generate()
 
-const initial = {
+export const initialState = {
 
   current: 0,
 
@@ -24,7 +24,7 @@ const initial = {
   history: [first, second]
 }
 
-export default handleActions({
+export const reducer = {
   ADD_TAB (state, { payload: { url, append } }) {
     const { tabs } = state
     let current = state.current || 0
@@ -101,8 +101,6 @@ export default handleActions({
 
   SET_CURRENT_TAB (state, { payload: { current } }) {
     const history = [state.tabs[current].id, ...state.history]
-    const nd = { ...state, current, history }
-    console.log(nd)
     return { ...state, current, history }
   },
 
@@ -115,4 +113,6 @@ export default handleActions({
     return { ...state, tabs, history, current }
   }
 
-}, initial)
+}
+
+export default handleActions(reducer, initialState)

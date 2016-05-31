@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import Browser from 'components/Browser'
 import store from 'store'
@@ -8,18 +8,10 @@ if (module.hot) {
   module.hot.accept('../reducers', () => store.replaceReducer(require('../reducers')))
 }
 
-class Main extends Component {
-
-  render () {
-    return (
-      <Provider store={store}>
-        <div>
-          <Browser />
-          <Devtools />
-        </div>
-      </Provider>
-    )
-  }
-}
-
-export default Main
+export default () => (
+  <Provider store={store}>
+    <div>
+      <Browser />
+    </div>
+  </Provider>
+)
