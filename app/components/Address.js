@@ -110,6 +110,7 @@ class Address extends Component {
         <Input
           className={inputClassName}
           index={index}
+          ref='input'
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
           value={(!empty && inputValue) || inactiveValue}
