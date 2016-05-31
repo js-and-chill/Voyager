@@ -2,8 +2,6 @@
 import React, { Component } from 'react'
 import { mouseTrap } from 'react-mousetrap'
 
-import { setShortcut } from 'actions/shortcuts'
-
 if (process.env.BROWSER) {
   require('styles/Input.scss')
 }

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mouseTrap } from 'react-mousetrap'
 
-import { setShortcut } from 'actions/shortcuts'
-
 import {
   removeTab,
   setCurrentTab,
@@ -21,7 +19,7 @@ if (process.env.BROWSER) {
 @connect(
   ({ tabs }) => ({
     tabs: tabs.tabs,
-    current: tabs.current,
+    current: tabs.current
   })
 )
 class Frame extends Component {
@@ -31,7 +29,7 @@ class Frame extends Component {
   }
 
   componentDidMount () {
-    const { shortcut, dispatch, bindShortcut } = this.props
+    const { dispatch, bindShortcut } = this.props
 
     bindShortcut('command+left', () => {
       const { current, tabs } = this.props
