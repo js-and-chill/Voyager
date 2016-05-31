@@ -18,6 +18,7 @@ class Address extends Component {
   handleKey = e => {
     const [ activeGroup, activeItem ] = this.state.active
     const { suggestions, onSubmit } = this.props
+    const { input } = this.refs
 
     if (e.key === 'ArrowUp') {
       let nextActiveGroup, nextActiveItem
@@ -58,6 +59,8 @@ class Address extends Component {
         inputValue: suggestions[nextActiveGroup].list[nextActiveItem],
         active: [ nextActiveGroup, nextActiveItem ]
       })
+
+      input.setValue(this.state.inputValue)
     }
 
     if (e.key === 'Enter') {
@@ -109,14 +112,9 @@ class Address extends Component {
           index={index}
           onBlur={this.setInactive}
           completeDidMatch={this.deactiveSuggestion}
-<<<<<<< HEAD
           value={(!empty && inputValue) || inactiveValue}
           displayValue={inactiveValue}
           complete={suggestions.length ? suggestions[0].list[0] : null}
-=======
-          value={(!empty && inputValue) || (empty && inputValue && inactiveValue)}
-          complete={suggestions.length && suggestions[0].list[0]}
->>>>>>> bc3d633033049999425f5310a5d6c1717579be87
           onKeyDown={this.handleKey}
           onChange={this.onInputChange} />
 

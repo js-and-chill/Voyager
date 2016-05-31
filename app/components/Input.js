@@ -53,6 +53,11 @@ class Input extends Component {
     input.select()
   }
 
+  setValue (value) {
+    const { input } = this.refs
+    input.value = value
+  }
+
   onBlur = e => {
     /*
      * Or maybe not
