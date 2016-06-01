@@ -25,8 +25,8 @@ class Browser extends Component {
     listen('CmdOrCtrl+L', 'inputFocus')
     listen('CmdOrCtrl+T', 'newTab')
     listen('CmdOrCtrl+W', 'removeTab')
-    listen('CmdOrCtrl+Alt+Left', 'tabRight')
-    listen('CmdOrCtrl+Alt+Right', 'tabLeft')
+    listen('CmdOrCtrl+Alt+Left', 'tabLeft')
+    listen('CmdOrCtrl+Alt+Right', 'tabRight')
   }
 
   render () {

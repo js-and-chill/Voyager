@@ -11,31 +11,21 @@ createClientListener('popup', (_, url) => createWindow(url, {
   titleBarStyle: 'default'
 }))
 
-const shortcut = window => (key, event) => globalShortcut.register(key, () => {
-  window.webContents.send('shortcut', event)
+const shortcut = window => key => globalShortcut.register(key, () => {
+  window.webContents.send(key)
 })
-
-const ignore = keys =>
-  globalShortcut.register(keys, e => e.preventDefault())
 
 app.on('ready', () => {
   const window = createWindow('http://localhost:3000')
 
-  globalShortcut.unregisterAll()
-
   window.on('focus', () => {
-    const register = shortcut(window)
+    const forward = shortcut(window)
 
-    //register('CmdOrCtrl+L', 'address:focus')
-    /*
-    register('CmdOrCtrl+T', 'new:tab')
-    // TODO make an option to select keyboard type
-    register('CmdOrCtrl+Z', 'remove:tab')
-    register('CmdOrCtrl+Left', 'history:back')
-    register('CmdOrCtrl+Right', 'history:forward')
-    register('CmdOrCtrl+Alt+Left', 'tab:left')
-    register('CmdOrCtrl+Alt+Right', 'tab:right')
-   */
+    forward('CmdOrCtrl+W')
+    forward('CmdOrCtrl+T')
+    forward('CmdOrCtrl+L')
+    forward('CmdOrCtrl+Alt+Left')
+    forward('CmdOrCtrl+Alt+Right')
   })
 
   window.on('blur', () => {
