@@ -1,11 +1,14 @@
 
 import React, { Component } from 'react'
-import { mouseTrap } from 'react-mousetrap'
+import { connect } from 'react-redux'
+
+import { setShortcut } from 'actions/shortcuts'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
 }
 
+@connect()
 class Input extends Component {
 
   state = {
@@ -85,10 +88,13 @@ class Input extends Component {
 
   componentDidMount () {
     const { input } = this.refs
-    const { displayValue, active, bindShortcut } = this.props
+    const { displayValue, active } = this.props
 
     if (active) {
-      bindShortcut('command+l', () => this.select())
+      this.props.dispatch(setShortcut({
+        name: 'inputFocus',
+        action: this.select.bind(this),
+      }))
     }
 
     input.value = displayValue
@@ -113,4 +119,4 @@ class Input extends Component {
   }
 }
 
-export default mouseTrap(Input)
+export default Input
