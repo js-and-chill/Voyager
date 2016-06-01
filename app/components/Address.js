@@ -14,10 +14,9 @@ class Address extends Component {
     empty: true
   }
 
-  handleKey = e => {
+  handleKey = (e, setValue, blur) => {
     const [ activeGroup, activeItem ] = this.state.active
     const { suggestions, onSubmit } = this.props
-    const { input } = this.refs
 
     if (e.key === 'ArrowUp') {
       let nextActiveGroup, nextActiveItem
@@ -38,7 +37,7 @@ class Address extends Component {
         active: [ nextActiveGroup, nextActiveItem ]
       })
 
-      input.setValue(suggestions[nextActiveGroup].list[nextActiveItem])
+      setValue(suggestions[nextActiveGroup].list[nextActiveItem])
     }
 
     if (e.key === 'ArrowDown') {
@@ -59,14 +58,14 @@ class Address extends Component {
         active: [ nextActiveGroup, nextActiveItem ]
       })
 
-      input.setValue(suggestions[nextActiveGroup].list[nextActiveItem])
+      setValue(suggestions[nextActiveGroup].list[nextActiveItem])
     }
 
     if (e.key === 'Enter') {
       this.setState({ empty: true })
       const { value } = e.target
       onSubmit(value)
-      this.refs.input.blur()
+      blur()
     }
   }
 
@@ -81,7 +80,7 @@ class Address extends Component {
   }
 
   setInactive = () => {
-    this.setState({ active: [ 0, 0 ] })
+    this.setState({ active: [ 0, 0 ], empty: true })
   }
 
   handleSuggestionsClick = index => {

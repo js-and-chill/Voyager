@@ -23,6 +23,10 @@ class Browser extends Component {
     const listen = (key, event) => this.props.dispatch(register(key, event))
 
     listen('CmdOrCtrl+L', 'inputFocus')
+    listen('CmdOrCtrl+T', 'newTab')
+    listen('CmdOrCtrl+W', 'removeTab')
+    listen('CmdOrCtrl+Alt+Left', 'tabRight')
+    listen('CmdOrCtrl+Alt+Right', 'tabLeft')
   }
 
   render () {

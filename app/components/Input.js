@@ -16,6 +16,12 @@ class Input extends Component {
     focus: false
   }
 
+  constructor (props) {
+    super(props)
+
+    this.setValue = this.setValue.bind(this)
+  }
+
   insertComplete = () => {
     const { complete } = this.props
     const { input } = this.refs
@@ -44,10 +50,18 @@ class Input extends Component {
       e.preventDefault()
     }
 
-    this.props.onKeyDown(e)
+    this.props.onKeyDown(e, this.setValue.bind(this), this.blur.bind(this))
   }
 
   shouldComponentUpdate (props, state) {
+
+    if (props.active) {
+      this.props.dispatch(setShortcut({
+        name: 'inputFocus',
+        action: this.select.bind(this),
+      }))
+    }
+
     if (props.complete !== this.props.complete) { return true }
     return false
   }
@@ -64,8 +78,7 @@ class Input extends Component {
   }
 
   setValue (value) {
-    const { input } = this.refs
-    input.value = value
+    this.refs.input.value = value
   }
 
   onBlur = e => {
@@ -89,13 +102,6 @@ class Input extends Component {
   componentDidMount () {
     const { input } = this.refs
     const { displayValue, active } = this.props
-
-    if (active) {
-      this.props.dispatch(setShortcut({
-        name: 'inputFocus',
-        action: this.select.bind(this),
-      }))
-    }
 
     input.value = displayValue
     input.focus()
