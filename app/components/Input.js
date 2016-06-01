@@ -62,6 +62,11 @@ class Input extends Component {
       }))
     }
 
+    if (props.displayValue !== this.props.displayValue) {
+      this.refs.input.value = props.displayValue
+      return true
+    }
+
     if (props.complete !== this.props.complete) { return true }
     return false
   }
