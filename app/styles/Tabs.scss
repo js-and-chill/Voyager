@@ -1,36 +1,35 @@
 
 .Tabs {
 
-  padding-left: 80px;
   background-color: #f0f0f0;
   display: flex;
   display: flex;
-  align-items: flex-end;
-  height: 35px;
+  align-items: center;
+  height: 30px;
   position: relative;
   background: none;
-  margin-bottom: -1px;
+  border-top: 1px solid #f0f0f0;
 
   .list {
   
     bottom: 0;
     width: 100%;
-    margin-right: 50px;
     display: flex;
     overflow: hidden;
   }
 
   .plus {
-    background-color: #FFF;
-    height: 100%;
-    padding: 5px;
+    background-color: #e5e5e5;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 
     i {
       color: silver;
-      margin-top: 5px;
+      margin-top: 3px;
     }
   }
 }

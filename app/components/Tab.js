@@ -31,7 +31,7 @@ class Tab extends Component {
       <div
         onMouseEnter={this.mouseOver(true)}
         onMouseLeave={this.mouseOver(false)}
-        className={cx('Tab new-tab', { active })}>
+        className={cx('Tab', { active })}>
 
         {favicon && <img
           src={favicon}

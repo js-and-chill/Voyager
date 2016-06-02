@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
-import cx from 'classnames'
 import { connect } from 'react-redux'
+import cx from 'classnames'
+
 import {
   addTab,
   updateCurrentTabUrl,
@@ -29,22 +30,6 @@ if (process.env.BROWSER) {
 )
 class Content extends Component {
 
-  reload = () => {
-    this.refs.webview.reload()
-  }
-
-  back = () => {
-    if (this.props.canGoBack) {
-      this.props.dispatch(historyGoBack())
-    }
-  }
-
-  forward = () => {
-    if (this.props.canGoForward) {
-      this.props.dispatch(historyGoForward())
-    }
-  }
-
   newWindow = e => {
     const { dispatch } = this.props
     return dispatch(addTab({ url: e.url, append: true }))
@@ -70,26 +55,6 @@ class Content extends Component {
 
     return (
       <div className={cx('Content', { active })}>
-        <div className='toolbar'>
-          <div className='back-forward'>
-            <i
-              className={cx('ion-ios-arrow-back', { disabled: !this.props.canGoBack })}
-              onClick={this.back} />
-            <i
-              className={cx('ion-ios-arrow-forward', { disabled: !this.props.canGoForward })}
-              onClick={this.forward} />
-          </div>
-          <i className='ion-refresh' onClick={this.reload} />
-          <AddressBar
-            address={address}
-            addressFocus={addressFocus}
-            active={active}
-            src={src}
-            current={current}
-            index={index}
-            tabs={tabs}
-            shortcut={shortcut} />
-        </div>
         <Webview
           className='webview-element'
           ref='webview'

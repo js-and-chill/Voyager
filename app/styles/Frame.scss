@@ -3,9 +3,44 @@
 
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #f0f0f0;
   width: 100vw;
   overflow: hidden;
   -webkit-user-select: none;
   -webkit-app-region: drag;
+  padding-left: 70px;
+  justify-content: center;
+  align-items: center;
+
+  .toolbar {
+
+    display: flex;
+    align-items: center;
+    height: 35px;
+
+    color: grey;
+
+    .icons {
+
+      position: absolute;
+      left: 100px;
+      width: 80px;
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      i {
+        color: grey;
+        cursor: pointer;
+      }
+
+      .ion-refresh {
+        cursor: pointer;
+      }
+
+      .disabled {
+        color: #d6d6d6;
+      }
+    }
+  }
 }

@@ -98,7 +98,14 @@ class Address extends Component {
 
   render () {
     const { active, empty } = this.state
-    const { index, inputClassName, suggestionsClassName, suggestions, inactiveValue } = this.props
+
+    const {
+      index,
+      inputClassName,
+      suggestionsClassName,
+      suggestions,
+      inactiveValue
+    } = this.props
 
     return (
       <div className='Address'>

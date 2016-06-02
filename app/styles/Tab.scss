@@ -1,77 +1,30 @@
 
 .Tab {
 
-  box-sizing: border-box;
-  transition: all .1s ease-in-out;
-  cursor: default;
   height: 30px;
-  bottom: 0;
-  position: relative;
-  font-family: Helvetica;
+  font-family: Helvetica Neue, Helvetica;
+  font-size: 13px;
   color: grey;
-  font-weight: lighter;
-  border-left: 1px solid #f0f0f0;
-  border-right: 1px solid #f0f0f0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #F0f0f0;
+  border-bottom: 1px solid #f0f0f0;
   flex: 1;
-  justify-content: flex-start;
-  background-color: #f0f0f0;
-  padding: 0 5px;
-  top: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 150px;
+
+  img {
+    margin-right: 4px;
+  }
 
   .ion-close-round {
     position: absolute;
-    font-size: 12px;
-    top: 7px;
-    right: 10px;
-  }
-
-  .title {
-    color: #222222;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    height: 28px;
-    line-height: 28px;
-    width: 100px;
-    max-width: 100px;
-  }
-
-  img {
-    margin-top: -2px;
-    margin-right: 5px;
+    right: 5px;
+    top: 10px;
   }
 
   &.active {
-    background-color: #fff;
-    z-index: 99;
-  }
-
-  .new-tab {
-    flex: 0.0001;
-    animation: flexGrow 500ms ease forwards;
-  }
-
-  .remove-item {
-    flex: 1;
-    animation: flexSrink 500ms ease forwards;
-  }
-
-}
-
-@keyframes flexGrow {
-  to { flex: 1; }
-}
-
-@keyframes flexSrink {
-  to {
-    flex: 0.1;
-    flex: 0.0001;
+    background-color: #FFF;
+    border-bottom: 1px solid #fff;
   }
 }

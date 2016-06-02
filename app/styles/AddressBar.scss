@@ -2,7 +2,6 @@
 .AddressBar {
 
   position: relative;
-  border: 1px solid #f0f0f0;
 
   .input-content {
     padding-left: 70px;
@@ -25,10 +24,6 @@
     &:focus {
       outline: none;
       border: none;
-    }
-
-    &.https-input {
-      padding-left: 42px;
     }
   }
 

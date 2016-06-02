@@ -5,6 +5,7 @@ import { register } from 'actions/shortcuts'
 
 import Content from 'components/Content'
 import Frame from 'components/Frame'
+import Tabs from 'components/Tabs'
 
 if (process.env.BROWSER) {
   require('styles/Browser.scss')
@@ -35,6 +36,7 @@ class Browser extends Component {
     return (
       <div className='Browser'>
         <Frame />
+        <Tabs tabs={tabs} active={current} />
         <div className='web-wrapper'>
           {tabs.map((tab, index) => {
             return (

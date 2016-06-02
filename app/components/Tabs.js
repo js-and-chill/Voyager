@@ -1,19 +1,27 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import {
   removeTab,
   setCurrentTab,
   addTab,
   updateTabFavicon
 } from 'actions/tabs'
+import { setShortcut } from 'actions/shortcuts'
+
 import Tab from './Tab'
 
 if (process.env.BROWSER) {
   require('styles/Tabs.scss')
 }
 
-@connect()
+@connect(
+  ({ tabs: { current }, shortcuts: { inputFocus } }) => ({
+    current,
+    inputFocus
+  })
+)
 class Tabs extends Component {
 
   selectTab = index => () => {
@@ -34,6 +42,26 @@ class Tabs extends Component {
     this.props.dispatch(updateTabFavicon({
       index,
       favicon: 'https://cdn2.iconfinder.com/data/icons/ourea-icons/128/File_-_Default_256x256-32.png'
+    }))
+  }
+
+  componentDidMount () {
+
+    const { dispatch } = this.props
+  
+    dispatch(setShortcut({
+      name: 'newTab',
+      action: () => {
+        this.addTab()
+        this.props.inputFocus()
+      }
+    }))
+
+    dispatch(setShortcut({
+      name: 'removeTab',
+      action: () => {
+        this.close(this.props.current)()
+      }
     }))
   }
 

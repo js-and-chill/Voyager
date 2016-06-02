@@ -50,6 +50,8 @@ class AddressBar extends Component {
   render () {
     const { suggestions, src, index } = this.props
 
+    console.log(`src: ${src}`)
+
     return (
       <div className='AddressBar'>
         <Like />

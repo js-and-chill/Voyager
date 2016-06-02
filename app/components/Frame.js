@@ -1,74 +1,49 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import { setShortcut } from 'actions/shortcuts'
+import cx from 'classnames'
 
 import {
-  removeTab,
-  setCurrentTab,
   addTab,
+  updateCurrentTabUrl,
+  updateTabTitle,
+  updateTabFavicon,
   historyGoBack,
   historyGoForward
 } from 'actions/tabs'
 
-import Tabs from './Tabs'
+import AddressBar from './AddressBar'
+
+import { setShortcut } from 'actions/shortcuts'
 
 if (process.env.BROWSER) {
   require('styles/Frame.scss')
 }
 
 @connect(
-  ({ tabs }) => ({
-    tabs: tabs.tabs,
-    current: tabs.current
+  ({ shortcuts, tabs: { current, tabs } }) => ({
+    canGoBack: tabs && tabs[current] && tabs[current].cursor < tabs[current].history.length - 1,
+    canGoForward: tabs && tabs[current] && tabs[current].cursor > 0,
+    shortcut: shortcuts.emitter,
+    current,
+    tabs
   })
 )
 class Frame extends Component {
 
-  state = {
-    mouseOver: null
+  reload = () => {
+    this.refs.webview.reload()
   }
 
-  componentDidMount () {
-    const { dispatch, bindShortcut } = this.props
+  back = () => {
+    if (this.props.canGoBack) {
+      this.props.dispatch(historyGoBack())
+    }
+  }
 
-    const register = (name, action) =>
-      dispatch(setShortcut({ name, action }))
-
-    register('historyBack', () => {
-      const { current, tabs } = this.props
-      const currentTab = tabs && tabs[current]
-      if (currentTab.history.length - 1 - currentTab.cursor) {
-        dispatch(historyGoBack())
-      }
-    })
-
-    register('historyForward', () => {
-      const { current, tabs } = this.props
-      const currentTab = tabs && tabs[current]
-      if (currentTab.cursor) {
-        dispatch(historyGoForward())
-      }
-    })
-
-    register('removeTab', () => {
-      dispatch(removeTab({ index: this.props.current }))
-    })
-
-    register('newTab', () => {
-      dispatch(addTab({ url: 'https://www.google.com' }))
-      dispatch(setCurrentTab({ current: this.props.tabs.length - 1 }))
-    })
-
-    register('tabLeft', () => {
-      const { current, tabs } = this.props
-      return dispatch(setCurrentTab({ current: !current ? tabs.length - 1 : current - 1 }))
-    })
-
-    register('tabRight', () => {
-      const { current, tabs } = this.props
-      return dispatch(setCurrentTab({ current: current === tabs.length - 1 ? 0 : current + 1 }))
-    })
+  forward = () => {
+    if (this.props.canGoForward) {
+      this.props.dispatch(historyGoForward())
+    }
   }
 
   render () {
@@ -76,7 +51,22 @@ class Frame extends Component {
 
     return (
       <div className='Frame'>
-        <Tabs tabs={tabs} active={current} />
+        <div className='toolbar'>
+          <div className='icons'>
+            <i
+              className={cx('ion-ios-arrow-back back', { disabled: !this.props.canGoBack })}
+              onClick={this.back} />
+            <i
+              className={cx('ion-ios-arrow-forward forward', { disabled: !this.props.canGoForward })}
+              onClick={this.forward} />
+            <i className='ion-refresh' onClick={this.reload} />
+          </div>
+          <AddressBar
+            src={tabs[current].history[tabs[current].cursor]}
+            current={current}
+            index={current}
+            tabs={tabs} />
+        </div>
       </div>
     )
   }

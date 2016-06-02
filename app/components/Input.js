@@ -55,13 +55,6 @@ class Input extends Component {
 
   shouldComponentUpdate (props, state) {
 
-    if (props.active) {
-      this.props.dispatch(setShortcut({
-        name: 'inputFocus',
-        action: this.select.bind(this),
-      }))
-    }
-
     if (props.displayValue !== this.props.displayValue) {
       this.refs.input.value = props.displayValue
       return true
@@ -111,6 +104,11 @@ class Input extends Component {
     input.value = displayValue
     input.focus()
     input.select()
+
+    this.props.dispatch(setShortcut({
+      name: 'inputFocus',
+      action: this.select.bind(this),
+    }))
   }
 
   render () {
