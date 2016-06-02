@@ -63,6 +63,28 @@ class Tabs extends Component {
         this.close(this.props.current)()
       }
     }))
+
+    dispatch(setShortcut({
+      name: 'tabRight',
+      action: () => {
+        const { current, tabs } = this.props
+
+        this.props.dispatch(setCurrentTab({
+          current: current === tabs.length - 1 ? 0 : current + 1
+        }))
+      }
+    }))
+
+    dispatch(setShortcut({
+      name: 'tabLeft',
+      action: () => {
+        const { current, tabs } = this.props
+
+        this.props.dispatch(setCurrentTab({
+          current: current === 0 ? tabs.length - 1 : current - 1
+        }))
+      }
+    }))
   }
 
   render () {
