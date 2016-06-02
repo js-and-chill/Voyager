@@ -1,16 +1,25 @@
 
 import React, { Component } from 'react'
-import { mouseTrap } from 'react-mousetrap'
+import { connect } from 'react-redux'
+
+import { setShortcut } from 'actions/shortcuts'
 
 if (process.env.BROWSER) {
   require('styles/Input.scss')
 }
 
+@connect()
 class Input extends Component {
 
   state = {
     inputLength: 0,
     focus: false
+  }
+
+  constructor (props) {
+    super(props)
+
+    this.setValue = this.setValue.bind(this)
   }
 
   insertComplete = () => {
@@ -41,10 +50,23 @@ class Input extends Component {
       e.preventDefault()
     }
 
-    this.props.onKeyDown(e)
+    this.props.onKeyDown(e, this.setValue.bind(this), this.blur.bind(this))
   }
 
   shouldComponentUpdate (props, state) {
+
+    if (props.active) {
+      this.props.dispatch(setShortcut({
+        name: 'inputFocus',
+        action: this.select.bind(this),
+      }))
+    }
+
+    if (props.displayValue !== this.props.displayValue) {
+      this.refs.input.value = props.displayValue
+      return true
+    }
+
     if (props.complete !== this.props.complete) { return true }
     return false
   }
@@ -61,8 +83,7 @@ class Input extends Component {
   }
 
   setValue (value) {
-    const { input } = this.refs
-    input.value = value
+    this.refs.input.value = value
   }
 
   onBlur = e => {
@@ -85,11 +106,7 @@ class Input extends Component {
 
   componentDidMount () {
     const { input } = this.refs
-    const { displayValue, active, bindShortcut } = this.props
-
-    if (active) {
-      bindShortcut('command+l', () => this.select())
-    }
+    const { displayValue, active } = this.props
 
     input.value = displayValue
     input.focus()
@@ -113,4 +130,4 @@ class Input extends Component {
   }
 }
 
-export default mouseTrap(Input)
+export default Input

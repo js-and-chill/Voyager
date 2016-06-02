@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { mouseTrap } from 'react-mousetrap'
+
+import { setShortcut } from 'actions/shortcuts'
 
 import {
   removeTab,
@@ -31,7 +32,10 @@ class Frame extends Component {
   componentDidMount () {
     const { dispatch, bindShortcut } = this.props
 
-    bindShortcut('command+left', () => {
+    const register = (name, action) =>
+      dispatch(setShortcut({ name, action }))
+
+    register('historyBack', () => {
       const { current, tabs } = this.props
       const currentTab = tabs && tabs[current]
       if (currentTab.history.length - 1 - currentTab.cursor) {
@@ -39,7 +43,7 @@ class Frame extends Component {
       }
     })
 
-    bindShortcut('command+right', () => {
+    register('historyForward', () => {
       const { current, tabs } = this.props
       const currentTab = tabs && tabs[current]
       if (currentTab.cursor) {
@@ -47,20 +51,23 @@ class Frame extends Component {
       }
     })
 
-    bindShortcut('command+w', e => {
-      e.preventDefault()
-      e.stopImmediatePropagation()
+    register('removeTab', () => {
       dispatch(removeTab({ index: this.props.current }))
     })
 
-    bindShortcut('command+t', () => {
+    register('newTab', () => {
       dispatch(addTab({ url: 'https://www.google.com' }))
       dispatch(setCurrentTab({ current: this.props.tabs.length - 1 }))
     })
 
-    bindShortcut('command+alt+left', () => {
+    register('tabLeft', () => {
       const { current, tabs } = this.props
       return dispatch(setCurrentTab({ current: !current ? tabs.length - 1 : current - 1 }))
+    })
+
+    register('tabRight', () => {
+      const { current, tabs } = this.props
+      return dispatch(setCurrentTab({ current: current === tabs.length - 1 ? 0 : current + 1 }))
     })
   }
 
@@ -75,4 +82,4 @@ class Frame extends Component {
   }
 }
 
-export default mouseTrap(Frame)
+export default Frame
