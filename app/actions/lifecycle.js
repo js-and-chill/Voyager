@@ -4,7 +4,7 @@ import { createAction } from 'redux-actions'
 /*
  * Will trigger handlers.addressIsUpdating
  *
- * to get the suggestions
+ * to get the suggestions while typing
  */
 export const addressIsUpdating = value => dispatch => false
 
