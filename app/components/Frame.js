@@ -12,6 +12,7 @@ import {
 } from 'actions/tabs'
 
 import AddressBar from './AddressBar'
+import Like from './Like'
 
 import { setShortcut } from 'actions/shortcuts'
 
@@ -66,6 +67,7 @@ class Frame extends Component {
             current={current}
             index={current}
             tabs={tabs} />
+          <Like />
         </div>
       </div>
     )
