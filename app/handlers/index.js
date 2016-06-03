@@ -1,4 +1,4 @@
 
-export { urlHandler } from '../../../Voyager-url/build'
+export { urlHandler } from 'voyager-url'
 export { history } from 'voyager-history'
 export { googleSearch } from 'voyager-search'
