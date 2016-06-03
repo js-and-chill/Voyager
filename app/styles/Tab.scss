@@ -11,7 +11,10 @@
   position: relative;
   background-color: #F0f0f0;
   border-bottom: 1px solid #f0f0f0;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
   flex: 1;
+  cursor: pointer;
 
   img {
     margin-right: 4px;
@@ -25,6 +28,8 @@
 
   &.active {
     background-color: #FFF;
+    border-left: none;
+    border-right: none;
     border-bottom: 1px solid #fff;
   }
 }

@@ -54,8 +54,6 @@ class AddressBar extends Component {
 
     return (
       <div className='AddressBar'>
-        <Like />
-        <div className='input-content'>
           <Address
             active={this.props.active}
             onSubmit={this.submit}
@@ -65,7 +63,6 @@ class AddressBar extends Component {
             suggestions={suggestions}
             index={index}
             onChange={this.evalSuggestion} />
-        </div>
       </div>
     )
   }

@@ -2,6 +2,7 @@
 .Frame {
 
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   width: 100vw;
   overflow: hidden;
