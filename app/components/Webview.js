@@ -25,8 +25,9 @@ class Webview extends Component {
 
     onNewWindow && webview.addEventListener('new-window', onNewWindow)
     onClickedLink && webview.addEventListener('will-navigate', onClickedLink)
+    onClickedLink && webview.addEventListener('did-get-redirect-request', onClickedLink)
     onDidClickLink && webview.addEventListener('did-navigate', onDidClickLink)
-    onDidClickLink && webview.addEventListener('did-navigate-in-page', onDidClickLink)
+    onDidClickLink && webview.addEventListener('did-navigate-in-page', onClickedLink)
     onFaviconUpdate && webview.addEventListener('page-favicon-updated', onFaviconUpdate)
     onDidFinishLoad && webview.addEventListener('did-finish-load', this.loaded)
   }
@@ -55,6 +56,8 @@ class Webview extends Component {
 
     onNewWindow && webview.removeEventListener('new-window', onNewWindow)
     onClickedLink && webview.removeEventListener('will-navigate', onClickedLink)
+    onClickedLink && webview.removeEventListener('did-navigate-in-page', onClickedLink)
+    onClickedLink && webview.removeEventListener('did-get-redirect-request', onClickedLink)
     onDidClickLink && webview.removeEventListener('did-navigate', onDidClickLink)
     onFaviconUpdate && webview.removeEventListener('page-favicon-updated', onFaviconUpdate)
     webview.removeEventListener('did-finish-load', this.loaded)
