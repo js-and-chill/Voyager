@@ -2,12 +2,18 @@
 import { updateCurrentTabUrl } from 'actions/tabs'
 import { createAction } from 'redux-actions'
 
-export const execFunctions = dispatch => ({
-  redirect: url => dispatch(updateCurrentTabUrl({ url }))
-})
-
 const addSuggestionGroup = createAction('ADD_SUGGESTION_GROUP', group => group)
 
-export const suggestFunctions = dispatch => ({
-  suggestGroup: group => dispatch(addSuggestionGroup(group))
-})
+const redirect = dispatch => url => dispatch(updateCurrentTabUrl({ url }))
+
+const suggest = dispatch => group => dispatch(addSuggestionGroup(group))
+
+export default (dispatch, getState) => {
+
+  const { tabs } = getState()
+
+  return {
+    redirect: redirect(dispatch),
+    suggest: suggest(dispatch)
+  }
+}

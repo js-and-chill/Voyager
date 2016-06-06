@@ -6,6 +6,12 @@ import { exec } from 'actions/tabs'
 
 import { emptySuggestions, suggest } from 'actions/autocomplete'
 
+import {
+  addressIsUpdating,
+  willNavigate,
+  didNavigate,
+} from 'actions/lifecycle'
+
 import Like from './Like'
 import Address from './Address'
 
@@ -23,34 +29,15 @@ if (process.env.BROWSER) {
 )
 class AddressBar extends Component {
 
-  updateSuggestions = debounce(value => {
-    this.props.dispatch(suggest(value))
-  }, 600)
-
-  onChange = e => {
-    const { value } = e.target
-    const { dispatch } = this.props
-
-    // dispatch(updateAddress(value))
-
-    if (value) {
-      return this.updateSuggestions(value)
-    }
-
-    dispatch(emptySuggestions())
-  }
-
   submit = value => {
     const { dispatch } = this.props
-    return dispatch(exec(value))
+    return dispatch(willNavigate(value))
   }
 
-  evalSuggestion = value => this.props.dispatch(suggest(value))
+  onChange = value => this.props.dispatch(addressIsUpdating(value))
 
   render () {
     const { suggestions, src, index } = this.props
-
-    console.log(`src: ${src}`)
 
     return (
       <div className='AddressBar'>
@@ -62,7 +49,7 @@ class AddressBar extends Component {
             suggestionsClassName='Suggestions'
             suggestions={suggestions}
             index={index}
-            onChange={this.evalSuggestion} />
+            onChange={this.onChange} />
       </div>
     )
   }

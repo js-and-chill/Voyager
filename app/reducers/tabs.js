@@ -21,6 +21,9 @@ export const initialState = {
     { id: first, title: 'google', cursor: 0, history: [ 'https://www.google.com/' ] },
     { id: second, title: 'Youtube', cursor: 0, history: [ 'https://www.youtube.com' ] }
   ],
+
+  displayUrl: 'https://www.google.com',
+
   history: [first, second]
 }
 
@@ -111,8 +114,7 @@ export const reducer = {
     const current = findIndex(tabs, { id: history[0] })
 
     return { ...state, tabs, history, current }
-  }
-
+  },
 }
 
 export default handleActions(reducer, initialState)

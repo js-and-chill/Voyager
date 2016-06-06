@@ -1,15 +1,13 @@
 
 .Input {
 
-  border-radius: 2px;
   border: 1px solid #f5f5f5;
   text-align: center;
-  padding: 4px;
-  padding-left: 10px;
+  padding: 4px 0;
   font-size: 13px;
   width: 500px;
   color: #424242;
-  background-color: #fcfcfc;
+  background-color: #fafafa;
 
   &:hover, &:focus {
     outline: none;

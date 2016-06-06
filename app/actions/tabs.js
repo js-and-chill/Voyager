@@ -10,6 +10,8 @@ export const exec = query => dispatch => {
   finder(query)
 }
 
+export const updateDisplayUrl = createAction('UPDATE_DISPLAY_URL', identity)
+
 export const setCurrentTab = createAction('SET_CURRENT_TAB', identity)
 
 export const historyGoBack = createAction('HISTORY_GO_BACK')

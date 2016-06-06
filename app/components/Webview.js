@@ -18,7 +18,7 @@ class Webview extends Component {
       onClickedLink,
       onDidClickLink,
       onDidFinishLoad,
-      onFaviconUpdate
+      onFaviconUpdate,
     } = this.props
 
     const { webview } = this.refs
@@ -26,9 +26,9 @@ class Webview extends Component {
     onNewWindow && webview.addEventListener('new-window', onNewWindow)
     onClickedLink && webview.addEventListener('will-navigate', onClickedLink)
     onDidClickLink && webview.addEventListener('did-navigate', onDidClickLink)
+    onDidClickLink && webview.addEventListener('did-navigate-in-page', onDidClickLink)
     onFaviconUpdate && webview.addEventListener('page-favicon-updated', onFaviconUpdate)
     onDidFinishLoad && webview.addEventListener('did-finish-load', this.loaded)
-    webview.addEventListener('hashchange', (...args) => console.log(args))
   }
 
   reload = () => {
@@ -47,7 +47,8 @@ class Webview extends Component {
       onNewWindow,
       onClickedLink,
       onDidClickLink,
-      onFaviconUpdate
+      onFaviconUpdate,
+      onThemeUpdate
     } = this.props
 
     const { webview } = this.refs

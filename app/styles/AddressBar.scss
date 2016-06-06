@@ -4,16 +4,10 @@
   position: relative;
 
   .input-content {
-    padding-left: 70px;
     color: #525252;
     width: 500px;
     border: none;
     outline: none;
-  }
-
-  .Suggestions {
-    position: absolute;
-    width: 499px;
   }
 
   .input {
@@ -25,17 +19,5 @@
       outline: none;
       border: none;
     }
-  }
-
-  .https {
-    font-family: Helvetica;
-    font-size: 13px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 2px;
-    position: absolute;
-    color: #2ecc71;
-    pointer-events: none;
   }
 }

@@ -6,10 +6,12 @@ import cx from 'classnames'
 import {
   addTab,
   updateCurrentTabUrl,
+  setCurrentTab,
   updateTabTitle,
   updateTabFavicon,
   historyGoBack,
-  historyGoForward
+  historyGoForward,
+  setColor
 } from 'actions/tabs'
 
 import AddressBar from './AddressBar'
@@ -31,8 +33,12 @@ if (process.env.BROWSER) {
 class Content extends Component {
 
   newWindow = e => {
-    const { dispatch } = this.props
-    return dispatch(addTab({ url: e.url, append: true }))
+    const { dispatch, tabs } = this.props
+    dispatch(addTab({ url: e.url, append: true }))
+
+    if (e.disposition === 'foreground-tab') {
+      dispatch(setCurrentTab({ current: tabs.length - 1 }))
+    }
   }
 
   clickedLink = e => {

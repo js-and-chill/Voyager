@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import hex from 'hex-rgb'
 
 import {
   removeTab,
@@ -88,7 +89,7 @@ class Tabs extends Component {
   }
 
   render () {
-    const { tabs, active } = this.props
+    const { tabs, active, current } = this.props
 
     return (
       <div className='Tabs'>
