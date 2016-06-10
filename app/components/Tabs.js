@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import hex from 'hex-rgb'
 
 import {
   removeTab,

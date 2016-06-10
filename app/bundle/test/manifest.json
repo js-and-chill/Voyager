@@ -1,0 +1,10 @@
+{
+  "name": "test",
+  "author": "Guillaume",
+
+  "main": "main.js",
+
+  "permissions": [
+    "redirect"
+  ]
+}

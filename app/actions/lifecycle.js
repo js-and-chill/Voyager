@@ -4,6 +4,13 @@ import * as handlers from 'handlers'
 
 import permissions from 'actions/std-functions'
 
+export const events = [
+  'didNavigate',
+  'willNavigate',
+  'pageDidLoad',
+  'addressIsUpdating'
+]
+
 export const queryHandler = (property, ...state) => query => {
 
   const keys = Object.keys(handlers)

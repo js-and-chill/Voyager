@@ -4,6 +4,9 @@ import webpack from 'webpack'
 import postcssImport from 'postcss-import'
 import precss from 'precss'
 import autoprefixer from 'autoprefixer'
+import nodeExternals from 'webpack-node-externals'
+import electronRenderer from 'webpack-target-electron-renderer'
+import fs from 'fs'
 
 const PATHS = {
   app: path.join(__dirname, '../app'),
@@ -12,12 +15,14 @@ const PATHS = {
 
 const env = process.env.NODE_ENV || 'development'
 
-export default {
+const options = {
 
   devtool: 'eval',
 
   resolve: {
     modulesDirectories: [ PATHS.app, 'node_modules' ],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    extensions: ['', '.js'],
     unsafeCache: true,
   },
 
@@ -38,7 +43,7 @@ export default {
   },
 
   module: {
-  
+
     loaders: [{
       test: /\.js$/,
       include: PATHS.app,
@@ -67,4 +72,13 @@ export default {
       }
     }),
   ],
+
+	//externals: [nodeExternals()],
+
+  target: 'electron-renderer'
+
 }
+
+//options.target = electronRenderer(options)
+
+export default options

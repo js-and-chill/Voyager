@@ -9,11 +9,13 @@ import config from './webpack/dev'
 const compiler = webpack(config)
 const PORT = 3000
 
+console.log('hello')
+
 express()
 
   .use(webpackDev(compiler, {
     publicPath: config.output.publicPath,
-    stats: { color: true },
+    stats: { color: console.log('hello') || true },
   }))
 
   .use(hot(compiler, { log: console.log }))
