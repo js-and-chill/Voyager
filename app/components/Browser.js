@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { register } from 'actions/shortcuts'
-//import { setup } from 'actions/extensions'
+import { setup } from 'actions/extensions'
 
 import Content from 'components/Content'
 import Frame from 'components/Frame'
@@ -15,7 +15,7 @@ if (process.env.BROWSER) {
 @connect(
   state => ({
     current: state.tabs.current,
-    extensions: state.extensions,
+    extensions: state.extensions.list,
     tabs: state.tabs.tabs
   })
 )
@@ -24,12 +24,6 @@ class Browser extends Component {
   componentDidMount () {
 
     const { extensions, dispatch } = this.props
-
-    /*
-    if (!extensions.length) {
-      return dispatch(setup())
-    }
-   */
 
     const listen = (key, event) => this.props.dispatch(register(key, event))
 
@@ -40,20 +34,14 @@ class Browser extends Component {
     listen('CmdOrCtrl+Alt+Right', 'tabRight')
   }
 
-  splash = () => {
-   return (
-    <h1>Hello Splash</h1>
-   )
+  componentWillMount () {
+  
+    const { dispatch } = this.props
+    dispatch(setup())
   }
 
   render () {
     const { current, tabs, extensions } = this.props
-
-    /*
-    if (!extensions.length) {
-      return this.splash()
-    }
-   */
 
     return (
       <div className='Browser'>

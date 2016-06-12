@@ -11,14 +11,12 @@ export const events = [
   'addressIsUpdating'
 ]
 
-export const queryHandler = (property, ...state) => query => {
+export const queryHandler = (property, getState) => query => {
 
-  const keys = Object.keys(handlers)
+  const { extensions: { list } } = getState()
 
-  for (const key of keys) {
-    const handler = handlers[key](permissions(...state))
-
-    if (handler[property](query)) { return }
+  for (const e of list) {
+    if (e.canHandle(property) && e.request(property, query)) { return }
   }
 }
 
@@ -27,9 +25,9 @@ export const queryHandler = (property, ...state) => query => {
  *
  * to get the suggestions while typing
  */
-export const addressIsUpdating = value => (...state) => {
+export const addressIsUpdating = value => (dispatch, getState) => {
 
-  const handler = queryHandler('addressIsUpdating', ...state)
+  const handler = queryHandler('addressIsUpdating', getState)
   handler(value)
 }
 
@@ -38,9 +36,9 @@ export const addressIsUpdating = value => (...state) => {
  *
  * to feed the history and handlers history
  */
-export const pageDidLoad = url => (...state) => {
+export const pageDidLoad = url => (dispatch, getState) => {
 
-  const handler = queryHandler('pageDidLoad', ...state)
+  const handler = queryHandler('pageDidLoad', getState)
   handler(url)
 }
 
@@ -49,9 +47,9 @@ export const pageDidLoad = url => (...state) => {
  *
  * before the page load
  */
-export const willNavigate = link => (...state) => {
+export const willNavigate = link => (dispatch, getState) => {
 
-  const handler = queryHandler('willNavigate', ...state)
+  const handler = queryHandler('willNavigate', getState)
   handler(link)
 }
 
@@ -60,9 +58,9 @@ export const willNavigate = link => (...state) => {
  *
  * after the page is loaded
  */
-export const didNavigate = link => (...state) => {
+export const didNavigate = link => (dispatch, getState) => {
 
-  const handler = queryHandler('didNavigate', ...state)
+  const handler = queryHandler('didNavigate', getState)
   handler(link)
 }
 

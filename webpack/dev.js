@@ -20,9 +20,8 @@ const options = {
   devtool: 'eval',
 
   resolve: {
+    
     modulesDirectories: [ PATHS.app, 'node_modules' ],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
-    extensions: ['', '.js'],
     unsafeCache: true,
   },
 
@@ -44,6 +43,11 @@ const options = {
 
   module: {
 
+    unknownContextRegExp: /$^/,
+    unknownContextCritical: false,
+    exprContextRegExp: /$^/,
+    exprContextCritical: false,
+
     loaders: [{
       test: /\.js$/,
       include: PATHS.app,
@@ -53,7 +57,9 @@ const options = {
         presets: [ 'es2015', 'react', 'stage-1' ],
         plugins: [ 'add-module-exports', 'transform-decorators-legacy' ],
       },
-    }, {
+    },
+    { test: /\.json$/, loader: 'json'},
+    {
       test: /\.scss$/,
       loaders: [ 'style', 'css', 'postcss-loader?parser=postcss-scss' ],
       include: PATHS.app,
@@ -64,7 +70,7 @@ const options = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-
+    new webpack.DefinePlugin({ "global.GENTLY": false }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(env),
@@ -73,12 +79,16 @@ const options = {
     }),
   ],
 
-	//externals: [nodeExternals()],
+  //noParse: [/vm2/],
 
-  target: 'electron-renderer'
+  target: 'electron-renderer',
+
+  node: {
+    __dirname: true,
+  }
 
 }
 
-//options.target = electronRenderer(options)
+options.target = electronRenderer(options)
 
 export default options

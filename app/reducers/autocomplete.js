@@ -21,6 +21,12 @@ export default handleActions({
     }
 
     return { ...state, groups: [ ...groups, group ] }
+  },
+
+  EMPTY_SUGGESTIONS (state, { payload: name }) {
+
+    if (!name) { return { ...state, groups: [] } }
+    return { ...state, groups: state.groups.filter(e => name !== e.name) }
   }
 
 }, initial)

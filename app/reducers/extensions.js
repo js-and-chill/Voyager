@@ -2,12 +2,12 @@
 import { handleActions } from 'redux-actions'
 
 const initial = {
-  list: [],
+  list: []
 }
 
 export default handleActions({
 
-  UPDATE_LIST (state, { payload: { list } }) {
+  UPDATE_LIST (state, { payload: list }) {
     return { ...state, list }
   }
 }, initial)

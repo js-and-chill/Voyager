@@ -1,4 +1,5 @@
 {
-  "permissions": [ "redirect" ],
+  "name": "voyager-url",
+  "permissions": [ "redirect", "suggest", "jsonp", "fetch", "alert", "log", "emptySuggestions" ],
   "main": "index.js"
 }

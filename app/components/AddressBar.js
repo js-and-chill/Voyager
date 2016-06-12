@@ -31,10 +31,17 @@ class AddressBar extends Component {
 
   submit = value => {
     const { dispatch } = this.props
+    dispatch(emptySuggestions())
     return dispatch(willNavigate(value))
   }
 
-  onChange = value => this.props.dispatch(addressIsUpdating(value))
+  onChange = value => {
+    if (value.trim() === '' || value.length < 3) {
+      return this.props.dispatch(emptySuggestions())
+    }
+
+    this.props.dispatch(addressIsUpdating(value))
+  }
 
   render () {
     const { suggestions, src, index } = this.props
