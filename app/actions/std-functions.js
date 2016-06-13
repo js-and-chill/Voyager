@@ -9,15 +9,16 @@ const addSuggestionGroup = createAction('ADD_SUGGESTION_GROUP', group => group)
 
 const emptySuggestions_ = createAction('EMPTY_SUGGESTIONS', name => name)
 
-const redirect = dispatch => url => dispatch(updateCurrentTabUrl({ url }))
+const redirect = dispatch => url => {
+  console.log('ACTION: redirection ${url}')
+  dispatch(updateCurrentTabUrl({ url }))
+}
 
 const suggest = dispatch => group => dispatch(addSuggestionGroup(group))
 
 const emptySuggestions = dispatch => name => dispatch(emptySuggestions_(name))
 
 export default (dispatch, getState) => {
-
-  const { tabs } = getState()
 
   return {
     redirect: redirect(dispatch),

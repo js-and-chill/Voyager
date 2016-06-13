@@ -9,7 +9,6 @@ import { emptySuggestions, suggest } from 'actions/autocomplete'
 import {
   addressIsUpdating,
   willNavigate,
-  didNavigate,
 } from 'actions/lifecycle'
 
 import Like from './Like'
@@ -31,8 +30,8 @@ class AddressBar extends Component {
 
   submit = value => {
     const { dispatch } = this.props
+    dispatch(willNavigate(value))
     dispatch(emptySuggestions())
-    return dispatch(willNavigate(value))
   }
 
   onChange = value => {

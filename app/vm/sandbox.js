@@ -19,7 +19,6 @@ class ExtensionVM {
       process.exit(0)
     }
 
-    this.vm = new NodeVM(options)
     this.path = path
     this.fn = null
 
@@ -33,6 +32,8 @@ class ExtensionVM {
       requireNative: ['http', 'util', 'path', 'fs'],
       requireRoot: path
     }
+
+    this.vm = new NodeVM(options)
   }
 
   getSandBox = (path, functions) => {
@@ -57,8 +58,18 @@ class ExtensionVM {
     return !!this.fn[key]
   }
 
-  request (event, ...args) {
-    return this.vm.call(this.fn[event], this.actions, ...args)
+  request (event, payload) {
+
+    return new Promise((resolve, reject) => {
+
+      const e = {
+        stopPropagation () { resolve(true) },
+        next () { resolve(false) },
+        value: payload
+      }
+    
+      this.vm.call(this.fn[event], this.actions, e)
+    })
   }
 }
 

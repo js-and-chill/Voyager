@@ -1,0 +1,5 @@
+{
+  "name": "url",
+  "permissions": ["redirect"],
+  "main": "index.js"
+}

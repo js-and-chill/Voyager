@@ -1,0 +1,5 @@
+{
+  "name": "Google Search",
+  "permissions": [ "redirect", "suggest", "fetch", "emptySuggestions" ],
+  "main": "index.js"
+}

@@ -1,6 +1,5 @@
 
 import { createAction } from 'redux-actions'
-import * as handlers from 'handlers'
 
 import permissions from 'actions/std-functions'
 
@@ -15,9 +14,26 @@ export const queryHandler = (property, getState) => query => {
 
   const { extensions: { list } } = getState()
 
-  for (const e of list) {
-    if (e.canHandle(property) && e.request(property, query)) { return }
-  }
+  list.reduce((promise, extension) => {
+
+    return promise.then(shouldStop => {
+
+      if (shouldStop) { return true }
+      
+      return new Promise((resolve, reject) => {
+        if (extension.package.name === 'url')
+          console.log(`Executing extension ${extension.package.name}`)
+        if (extension.canHandle(property)) {
+          console.log(`Extension can handle it`)
+          extension.request(property, query)
+            .then(e => console.log(`Extension resolved with ${e}`) || resolve(e))
+            .catch(e => console.log(e))
+        }
+      })
+    })
+    .catch(e => console.log(e))
+
+  }, Promise.resolve())
 }
 
 /*
@@ -49,6 +65,7 @@ export const pageDidLoad = url => (dispatch, getState) => {
  */
 export const willNavigate = link => (dispatch, getState) => {
 
+  console.log(`Will Navigate: ${link}`)
   const handler = queryHandler('willNavigate', getState)
   handler(link)
 }

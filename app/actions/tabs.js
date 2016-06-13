@@ -5,6 +5,8 @@ import * as handlers from 'handlers'
 import { execFunctions } from 'actions/std-functions'
 import { identity } from 'lodash'
 
+import { didNavigate } from './lifecycle'
+
 export const exec = query => dispatch => {
   const finder = createExecFinder(handlers, execFunctions(dispatch))
   finder(query)
