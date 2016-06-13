@@ -10,7 +10,7 @@ export const events = [
   'addressIsUpdating'
 ]
 
-export const queryHandler = (property, getState) => query => {
+export const queryHandler = (property, dispatch, getState) => query => {
 
   const { extensions: { list } } = getState()
 
@@ -22,11 +22,9 @@ export const queryHandler = (property, getState) => query => {
       
       return new Promise((resolve, reject) => {
         if (extension.package.name === 'url')
-          console.log(`Executing extension ${extension.package.name}`)
         if (extension.canHandle(property)) {
-          console.log(`Extension can handle it`)
-          extension.request(property, query)
-            .then(e => console.log(`Extension resolved with ${e}`) || resolve(e))
+          extension.request(property, query, permissions(dispatch, getState))
+            .then(resolve)
             .catch(e => console.log(e))
         }
       })
@@ -43,7 +41,7 @@ export const queryHandler = (property, getState) => query => {
  */
 export const addressIsUpdating = value => (dispatch, getState) => {
 
-  const handler = queryHandler('addressIsUpdating', getState)
+  const handler = queryHandler('addressIsUpdating', dispatch, getState)
   handler(value)
 }
 
@@ -54,7 +52,7 @@ export const addressIsUpdating = value => (dispatch, getState) => {
  */
 export const pageDidLoad = url => (dispatch, getState) => {
 
-  const handler = queryHandler('pageDidLoad', getState)
+  const handler = queryHandler('pageDidLoad', dispatch, getState)
   handler(url)
 }
 
@@ -65,8 +63,7 @@ export const pageDidLoad = url => (dispatch, getState) => {
  */
 export const willNavigate = link => (dispatch, getState) => {
 
-  console.log(`Will Navigate: ${link}`)
-  const handler = queryHandler('willNavigate', getState)
+  const handler = queryHandler('willNavigate', dispatch, getState)
   handler(link)
 }
 
@@ -77,7 +74,7 @@ export const willNavigate = link => (dispatch, getState) => {
  */
 export const didNavigate = link => (dispatch, getState) => {
 
-  const handler = queryHandler('didNavigate', getState)
+  const handler = queryHandler('didNavigate', dispatch, getState)
   handler(link)
 }
 

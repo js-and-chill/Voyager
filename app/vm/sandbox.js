@@ -58,7 +58,31 @@ class ExtensionVM {
     return !!this.fn[key]
   }
 
-  request (event, payload) {
+  request (event, payload, functions) {
+
+    const { NodeVM } = remote.require('vm2')
+
+    try {
+      this.package = loadJSON(`${this.path}/package.json`)
+    } catch (e) {
+      console.log(e)
+      process.exit(0)
+    }
+
+    this.actions = this.getSandBox(this.path, functions)
+
+    const options = {
+      console: 'inherit',
+      require: true,
+      timeout: 5000,
+      requireExternal: true,
+      requireNative: ['http', 'util', 'path', 'fs'],
+      requireRoot: this.path
+    }
+
+    this.vm = new NodeVM(options)
+
+    this.init()
 
     return new Promise((resolve, reject) => {
 

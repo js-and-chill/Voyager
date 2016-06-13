@@ -1,0 +1,5 @@
+{
+  "name": "twitter",
+  "permissions": ["redirect"],
+  "main": "index.js"
+}

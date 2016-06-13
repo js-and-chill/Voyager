@@ -10,7 +10,6 @@ const addSuggestionGroup = createAction('ADD_SUGGESTION_GROUP', group => group)
 const emptySuggestions_ = createAction('EMPTY_SUGGESTIONS', name => name)
 
 const redirect = dispatch => url => {
-  console.log('ACTION: redirection ${url}')
   dispatch(updateCurrentTabUrl({ url }))
 }
 
