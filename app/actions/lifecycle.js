@@ -20,7 +20,6 @@ export const queryHandler = (property, dispatch, getState) => query => {
 
       if (shouldStop) { return true }
       
-      console.log(extension.package.name)
       return new Promise((resolve, reject) => {
         extension.request(property, query, permissions(dispatch, getState))
           .then(resolve)
@@ -39,8 +38,11 @@ export const queryHandler = (property, dispatch, getState) => query => {
  */
 export const addressIsUpdating = value => (dispatch, getState) => {
 
-  const handler = queryHandler('addressIsUpdating', dispatch, getState)
-  handler(value)
+  const { extensions: { list } } = getState()
+
+  list.filter(e => e.canHandle('addressIsUpdating')).forEach(e => {
+    e.request('addressIsUpdating', value, permissions(dispatch, getState))
+  })
 }
 
 /*

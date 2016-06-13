@@ -34,14 +34,13 @@ class AddressBar extends Component {
     dispatch(emptySuggestions())
   }
 
-  onChange = value => {
+  onChange = debounce(value => {
     if (value.trim() === '' || value.length < 3) {
-      console.log(`Empty suggestions`)
       return this.props.dispatch(emptySuggestions())
     }
 
     this.props.dispatch(addressIsUpdating(value))
-  }
+  }, 500)
 
   render () {
     const { suggestions, src, index } = this.props

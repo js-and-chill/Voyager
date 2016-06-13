@@ -21,13 +21,10 @@ exports.addressIsUpdating = ({ suggest, fetch, emptySuggestions }, e) => {
       return e.next()
     }
 
-    console.log('suggesting')
     suggest({
       name: 'Google Search',
       icon: 'http://images.dailytech.com/nimage/G_is_For_Google_New_Logo_Thumb.png',
       list: results[1].slice(0, 5)
     })
   })
-
-  return e.next()
 }

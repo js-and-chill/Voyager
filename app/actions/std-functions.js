@@ -2,6 +2,7 @@
 import { updateCurrentTabUrl } from 'actions/tabs'
 import { createAction } from 'redux-actions'
 import { remote } from 'electron'
+import { debounce } from 'lodash'
 
 import fetch from 'superagent'
 
@@ -13,9 +14,8 @@ const redirect = dispatch => url => {
   dispatch(updateCurrentTabUrl({ url }))
 }
 
-const suggest = dispatch => group => {
+const suggest = dispatch => group =>
   dispatch(addSuggestionGroup(group))
-}
 
 const emptySuggestions = dispatch => name => dispatch(emptySuggestions_(name))
 

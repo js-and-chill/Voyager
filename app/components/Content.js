@@ -14,6 +14,8 @@ import {
   setColor
 } from 'actions/tabs'
 
+import { didNavigate } from 'actions/lifecycle'
+
 import AddressBar from './AddressBar'
 import Webview from './Webview'
 
@@ -48,8 +50,9 @@ class Content extends Component {
   }
 
   didFinishLoad = ({ title }) => {
-    const { dispatch, index } = this.props
+    const { dispatch, index, src } = this.props
     dispatch(updateTabTitle({ index, title }))
+    dispatch(didNavigate(src))
   }
 
   onFaviconUpdate = e => {

@@ -64,8 +64,6 @@ export const reducer = {
     const currentTab = tabs[state.current]
     const history = currentTab.history.slice(currentTab.cursor)
 
-    console.log(`UPDATE_CURRENT_TAB_URL, ${url}`)
-
     currentTab.title = `${url.slice(0, 9)}...`
     currentTab.history = [url, ...history]
 

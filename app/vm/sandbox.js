@@ -15,7 +15,6 @@ class ExtensionVM {
     try {
       this.package = loadJSON(`${path}/package.json`)
     } catch (e) {
-      console.log(e)
       process.exit(0)
     }
 
@@ -62,13 +61,6 @@ class ExtensionVM {
 
     const { NodeVM } = remote.require('vm2')
 
-    try {
-      this.package = loadJSON(`${this.path}/package.json`)
-    } catch (e) {
-      console.log(e)
-      process.exit(0)
-    }
-
     this.actions = this.getSandBox(this.path, functions)
 
     const options = {
@@ -91,7 +83,7 @@ class ExtensionVM {
         next () { resolve(false) },
         value: payload
       }
-    
+
       this.vm.call(this.fn[event], this.actions, e)
     })
   }
