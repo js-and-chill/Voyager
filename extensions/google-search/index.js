@@ -16,10 +16,12 @@ exports.addressIsUpdating = ({ suggest, fetch, emptySuggestions }, e) => {
 
   fetch(`http://clients1.google.com/complete/search?output=toolbar&client=firefox&q=${e.value}`, (err, results) => {
     if (err) {
+      console.log(`Err:`, err)
       emptySuggestions('Google Search')
       return e.next()
     }
 
+    console.log('suggesting')
     suggest({
       name: 'Google Search',
       icon: 'http://images.dailytech.com/nimage/G_is_For_Google_New_Logo_Thumb.png',

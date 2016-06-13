@@ -13,7 +13,9 @@ const redirect = dispatch => url => {
   dispatch(updateCurrentTabUrl({ url }))
 }
 
-const suggest = dispatch => group => dispatch(addSuggestionGroup(group))
+const suggest = dispatch => group => {
+  dispatch(addSuggestionGroup(group))
+}
 
 const emptySuggestions = dispatch => name => dispatch(emptySuggestions_(name))
 

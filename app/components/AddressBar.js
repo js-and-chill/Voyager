@@ -36,6 +36,7 @@ class AddressBar extends Component {
 
   onChange = value => {
     if (value.trim() === '' || value.length < 3) {
+      console.log(`Empty suggestions`)
       return this.props.dispatch(emptySuggestions())
     }
 

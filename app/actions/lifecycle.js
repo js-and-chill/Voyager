@@ -14,19 +14,17 @@ export const queryHandler = (property, dispatch, getState) => query => {
 
   const { extensions: { list } } = getState()
 
-  list.reduce((promise, extension) => {
+  list.filter(e => e.canHandle(property)).reduce((promise, extension) => {
 
     return promise.then(shouldStop => {
 
       if (shouldStop) { return true }
       
+      console.log(extension.package.name)
       return new Promise((resolve, reject) => {
-        if (extension.package.name === 'url')
-        if (extension.canHandle(property)) {
-          extension.request(property, query, permissions(dispatch, getState))
-            .then(resolve)
-            .catch(e => console.log(e))
-        }
+        extension.request(property, query, permissions(dispatch, getState))
+          .then(resolve)
+          .catch(e => console.log(e))
       })
     })
     .catch(e => console.log(e))
