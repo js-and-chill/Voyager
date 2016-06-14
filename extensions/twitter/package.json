@@ -1,5 +1,11 @@
 {
   "name": "twitter",
-  "permissions": ["redirect"],
-  "main": "index.js"
+  "permissions": [
+    "redirect",
+    "lowdb"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "lowdb": "^0.13.1"
+  }
 }

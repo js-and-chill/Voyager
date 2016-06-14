@@ -78,6 +78,8 @@ class ExtensionVM {
 
     return new Promise((resolve, reject) => {
 
+      console.log(`Calling ${this.package.name} with ${event}`)
+
       const e = {
         stopPropagation () { resolve(true) },
         next () { resolve(false) },

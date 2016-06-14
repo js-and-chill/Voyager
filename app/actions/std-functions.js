@@ -3,6 +3,7 @@ import { updateCurrentTabUrl } from 'actions/tabs'
 import { createAction } from 'redux-actions'
 import { remote } from 'electron'
 import { debounce } from 'lodash'
+import lowdb from 'lowdb'
 
 import fetch from 'superagent'
 

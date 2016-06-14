@@ -46,7 +46,7 @@ class Content extends Component {
   clickedLink = e => {
     const { dispatch } = this.props
     console.log(`Redirecting to ${e.url || e.newURL}`)
-    dispatch(updateCurrentTabUrl({ url: e.url || e.newURL }))
+    dispatch(updateCurrentTabUrl({ url: e.newURL || e.url }))
   }
 
   didFinishLoad = ({ title }) => {
