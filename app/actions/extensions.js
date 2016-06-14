@@ -6,7 +6,7 @@ import fs from 'fs'
 
 const loadJSON = file => JSON.parse(fs.readFileSync(file, 'utf-8'))
 
-const initialExtensions = loadJSON('/Users/guillaume/Voyager/Voyager/app/extensions.json')
+const initialExtensions = loadJSON('../extensions.json')
 
 const updateList = createAction('UPDATE_LIST', list => list)
 
